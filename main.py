@@ -210,19 +210,22 @@ async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity
 
 
 @app.api_route("/api/pantry/item/{action}", response_class=fastapi.responses.JSONResponse)
-async def update_count(request: fastapi.Request, action, id: str, num: int):
-    try:
-        for i in pantries_db.fetch().items:
-            if id in i['items']:
-                if action == "add":
-                    i['items'][id]['quantity'] += num
-                elif action == "remove":
-                    i['items'][id]['quantity'] -= num
-                pantries_db.put(i)
+async def update_count(request: fastapi.Request, action: str, id: str, num: int):
+    
+    p = pantries_db.fetch({"key": request.cookies.get("key")}).items[0]
+    for i in p['items']:
+        if str(p['items'][i]['item_id']) == str(id):
+            print(p['items'][i]['quantity'])
+            if action.lower() == "add":
+                p['items'][i]['quantity'] += num
+                pantries_db.put({"key": request.cookies.get("key"), "items": p['items']})
                 return {"error": "NONE","code": 200}
-    except Exception as e:
-        print(e)
-        return {"error": "NOT_ALLOWED","code": 455}
+            else:
+                p['items'][i]['quantity'] -= num
+                pantries_db.put({"key": request.cookies.get("key"), "items": p['items']})
+                return {"error": "NONE","code": 200}
+    
+    return {"error": "ITEM_NOT_FOUND","code": 200}
             
 
 @app.api_route("/api/upload", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
@@ -254,6 +257,7 @@ async def keys(request: fastapi.Request):
         return {"error": "NOT_ALLOWED","code": 405 ,"key": "NOT_ALLOWED"}
     else:
         return {"error": "NONE","code": 200 ,"key": random.choice(ks)}
+
 
 @app.api_route("/api/barcode/process", response_class=fastapi.responses.JSONResponse)
 async def process_barcode(barcode: str, key: str):
@@ -287,3 +291,4 @@ async def process_barcode(barcode: str, key: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="localhost", port=8000, reload=True)
+ #120074, 3
