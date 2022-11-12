@@ -111,6 +111,14 @@ a {
 	background: linear-gradient(0deg, #000, #fff);
 }
 
+#desc-2 {
+	font-size: 3vw;
+	width: 37.5vw;
+	position: absolute;
+	top: 28.5vw;
+	left: 10vw;
+}
+
 .window-3 {
 	position: absolute;
 	top: calc(9 / 16 * 2 * 100vw);
@@ -118,4 +126,35 @@ a {
 	width: 100vw;
 	height: calc(9 / 16 * 100vw);
 	background: #000;
+}
+
+.screenshot1,
+.screenshot2 {
+	opacity: 0;
+	box-shadow: rgba(0, 0, 0, 0.5) 0 2vw 8vw 0;
+	border-radius: 2vw;
+	position: absolute;
+	transition: 1000ms;
+}
+
+.screenshot1 {
+	width: 35vw;
+	right: -40vw;
+	top: 36vw;
+}
+
+.screenshot1.toggled {
+	opacity: 0.75;
+	right: 10vw;
+}
+
+.screenshot2 {
+	width: 35vw;
+	left: -40vw;
+	top: 50vw;
+}
+
+.screenshot2.toggled {
+	opacity: 0.75;
+	left: 10vw;
 }

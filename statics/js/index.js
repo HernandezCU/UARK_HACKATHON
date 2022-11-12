@@ -13,10 +13,13 @@ $(window).resize(function () {
 });
 
 $(window).scroll(function () {
-	if ($(this).scrollTop() > 250) {
+	if ($(this).scrollTop() > 0) {
 		$("#scroll-ctn").hide(500);
+		$(".screenshot1, .screenshot2").addClass("toggled");
+		console.log("test1");
 	} else {
-		console.log(parseInt($(window).height()) > 500);
 		$("#scroll-ctn").show(500);
+		$(".screenshot1, .screenshot2").removeClass("toggled");
+		console.log("test2");
 	}
 });
