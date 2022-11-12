@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-const API_KEY = `dd9114a465054062b6d590056aae1f94`;
-//1 point per request, 0.01 points per recipe returned
-
-jFetch(`https://api.spoonacular.com/recipes/findByIngredients`, {
-    apiKey: API_KEY,
-    ingredients: "raspberry, flour, egg, butter",
-    number: 10,
-    ranking: 2,
-    ignorePantry: true
-}, (data) => {
-    document.getElementById("test").innerHTML = JSON.stringify(data);
-});
-=======
 function prep() {
     getApiKey();
     setGlobalConstant("INGREDIENT", sessionStorage.getItem("expired_search_ingredient"));
@@ -42,7 +28,7 @@ function main() {
         if(data.length == 0) {
             $("#requirements").hide();
             $("#recipe-indicator").hide();
-            recipeName.innerHTML = "No recipes found";
+            recipeName.innerHTML = "no recipes found.";
             return
         }
 
@@ -85,4 +71,3 @@ jFetch(`https://api.spoonacular.com/recipes/analyzeInstructions`, {
 */
 
 window.addEventListener("load", prep);
->>>>>>> 1c20891c6a0c8ac6430564b3e0cf4a09af4eaaf2
