@@ -299,9 +299,7 @@ async def process_barcode(barcode: str, key: str):
         return {"success": False}
 
 
-
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="localhost", port=8000, reload=True)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("main:app", host="localhost", port=8000, reload=True)
 
