@@ -13,7 +13,7 @@ input[type="submit"] {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding: 5vw;
+	padding: 3vw;
 	border-radius: 2vw;
 	background: #f1f1f1;
 	box-shadow: rgba(0, 0, 0, 0.2) 0 2vw 8vw 0;
@@ -22,10 +22,10 @@ input[type="submit"] {
 .file-upload,
 .submit {
 	cursor: pointer;
-	font-size: 5vw;
+	font-size: 3vw;
 	text-align: center;
 	margin: 1vw;
-	width: 30vw;
+	width: 20vw;
 	border: 0.1vw solid #ccc;
 	border-radius: 1vw;
 	display: inline-block;
@@ -37,4 +37,12 @@ input[type="submit"] {
 .submit:hover {
 	background: #1f1f1f;
 	color: #f1f1f1;
+}
+
+#img {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 20vw;
+	border-radius: 1vw;
 }
