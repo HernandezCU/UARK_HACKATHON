@@ -58,6 +58,11 @@
 		<link rel="stylesheet" href="https://use.typekit.net/ocf5mhq.css" />
 		<link rel="stylesheet" href="../statics/css/inventory.css" />
 		<script src="../statics/js/utils.js"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.1.min.js"
+			integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+			crossorigin="anonymous"
+		></script>
 		<title>Recipe</title>
 	</head>
 	<body>
@@ -75,10 +80,10 @@
 		<div class="recipe">
 			<div class="recipe-food" id="recipe-image"></div>
 			<div class="recipe-name">
-				<span style="color: lightgreen">recipe</span>
+				<span style="color: lightgreen" id="recipe-indicator">recipe</span>
 				<span id="recipe-name"></span>
 			</div>
-			<div class="recipe-requirements">
+			<div class="recipe-requirements" id="requirements">
 				<ol id="ingredient-list">
 					<span style="color: red">ingredients:</span>
 				</ol>

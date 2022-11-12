@@ -37,8 +37,13 @@ function main() {
         ranking: 2,
         ignorePantry: true
     }, (data) => {
+        $('#requirements').show();
+        $("#recipe-indicator").show();
         if(data.length == 0) {
-            //
+            $("#requirements").hide();
+            $("#recipe-indicator").hide();
+            recipeName.innerHTML = "No recipes found";
+            return
         }
 
         //load name
