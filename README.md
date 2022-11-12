@@ -38,10 +38,9 @@ Rithyka (Kenshin): https://github.com/kenshin7
 
 APIs: \
 Spoonacular: https://spoonacular.com/food-api/docs \
-Recipes API: https://rapidapi.com/blog/recipe-apis/ 
 
 Hosting: \
-EasyCDN: https://github.com/SlumberDemon/EasyCdn 
+Deta: https://www.deta.sh/
 
 ## License
 
