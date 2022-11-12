@@ -1,10 +1,12 @@
+//~ yes callback hell, would switch to promises if not so much work
+
 function prep() {
     //get api key
     jFetch(`${location.href}api/key`, {}, (data) => {
         setGlobalConstant("API_KEY", data.key);
     });
 
-    //get image
+    //get last uploaded image
     bFetch(`${location.href}api/cdn/${stringDecode(document.cookie, ",")["key"]}`, {}, (data) => {
         window["uploadedImageUrl"] = data;
     });
@@ -47,6 +49,7 @@ function getCode(callback) {
         src: uploadedImageUrl
     }, (result) => {
         if(typeof(result) != "undefined") {
+            console.log(result.codeResult.code);
             callback(result.codeResult.code);
             return true;
         }
@@ -62,14 +65,33 @@ function searchByUPC(upc, callback) {
 }
 
 function addToPantry(product) {
-    jFetch(`${location.href}api/pantry/add`, {
+    //~ condition to return here
+    //
+
+    let item = {
         item_id: product.id,
         name: product.title,
         quantity: 1,
         image: product.image,
         upc: product.upc
-    }, (data) => {
-        console.log("added to pantry, here is response data:", data);
+    };
+
+    //get quantity of matching
+    jFetch(`${location.href}api/pantry/get`, {}, (data) => {
+        let inventory = JSON.parse(data);
+        console.log("get inventory", inventory);
+
+        let matchingItem = inventory[product.id];
+        if(matchingItem) {
+            console.log("matching item", matchingItem);
+            item.quantity += matchingItem.quantity;
+        }
+
+        //actually add the item
+        jFetch(`${location.href}api/pantry/add`, item, (data) => {
+            console.log("added item", item);
+            console.log("response", data);
+        });
     });
 }
 
