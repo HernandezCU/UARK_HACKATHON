@@ -1,6 +1,10 @@
 //~ yes callback hell, would switch to promises if not so much work
 
 function prep() {
+    if(sessionStorage.getItem("expired_curlest_page") == "inv") {
+        return;
+    }
+
     //get api key
     jFetch(`${location.href}api/key`, {}, (data) => {
         setGlobalConstant("API_KEY", data.key);
@@ -64,11 +68,15 @@ function searchByUPC(upc, callback) {
     });
 }
 
-function addToPantry(product) {
-    if(sessionStorage.getItem("expired_curlest_page") == "inv") {
-        return;
-    }
+function reload() {
+    sessionStorage.setItem("expired_curlest_page", "inv");
 
+    //change local values
+    //
+    //location.reload();
+}
+
+function addToPantry(product) {
     let item = {
         item_id: product.id,
         name: product.title,
@@ -82,31 +90,32 @@ function addToPantry(product) {
         let inventory = JSON.parse(data);
         console.log("got inventory", inventory);
 
-        //if it already exists, add to it
         if(inventory[product.id]) {
+            //if it already exists, add to it
             modifyItemCount(product.id, 1);
-            return;
         }
-
-        //if it doesn't already exist, add it to the pantry
-        jFetch(`${location.href}api/pantry/add`, item, (data) => {
-            console.log("added item", item);
-
-            sessionStorage.setItem("expired_curlest_page", "inv");
-            //update page
-            location.reload();
-        });
+        else {
+            //if it doesn't already exist, add it to the pantry
+            jFetch(`${location.href}api/pantry/add`, item, (data) => {
+                console.log("added item", item);
+                reload();
+            });
+        }
     });
 }
 function modifyItemCount(id, amt) {
     if(amt == 0) {
         return;
     }
-    
-    //change db
-    jFetch(`${location.href}api/pantry/item/${amt > 0 ? "add" : "remove"}?id=${id}&num=${amt}`, {}, (data) => {});
 
-    //change local view
+    //change db
+    jFetch(`${location.href}api/pantry/item/add`, {
+        id: id,
+        num: amt
+    }, (data) => {
+        console.log("modified", id, amt);
+        reload();
+    });
 }
 
 window.addEventListener("load", prep);
