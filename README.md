@@ -1,6 +1,6 @@
 # <EXPIRED>
 
-## Description
+## EXPIRED: Description
 
 - The purpose of this project? UARK 2022 FALL HACKATHON! Additionally, we all enjoy coding and so building EXPIRED was an enjoyment as a team.
 - What is EXPIRED? This is a pantry tracker which runs on a mobile device. It captures information through a camera and uses a UCP API to gather data.
