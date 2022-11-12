@@ -252,7 +252,6 @@ async def process_barcode(barcode: str, key: str):
         res = session.get(f'https://api.spoonacular.com/food/products/upc/{barcode}?apiKey={random_key}')
         res = res.json()
 
-        print(res)
 
         if 'status' in res and res['status'] == "failure":
             return {"success": "NOT_FOUND"}
