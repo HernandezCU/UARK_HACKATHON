@@ -68,8 +68,29 @@ body {
 
 .item-img {
 	width: 86vw;
+	height: 20vw;
+	background: url("../img/banana.jfif");
+	background-position-y: 40%;
 	border-radius: 2vw;
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+.item-desc {
+	font-size: 3.5vw;
+	position: absolute;
+	top: 22vw;
+}
+
+.item-desc:not(.item-name) {
+	opacity: 0.25;
+}
+
+.item-name {
+	left: 0;
+}
+
+.item-quantity {
+	right: 0;
 }
