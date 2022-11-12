@@ -53,6 +53,14 @@
 				<div class="item-desc item-amount">
 					Amount: {{item['quantity']}}
 				</div>
+				<div class="buttons-ctn">
+					<button
+						class="mod-btn"
+						onclick="modifyItemCount({{ item['item_id'] }}, +1);">/\</button>
+					<button
+						class="mod-btn"
+						onclick="modifyItemCount({{ item['item_id'] }}, -1);">\/</button>
+				</div>
 			</div>
 			{%endfor%}
 		</div>

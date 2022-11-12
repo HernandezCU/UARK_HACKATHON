@@ -1,10 +1,16 @@
+//~ yes callback hell, would switch to promises if not so much work
+
 function prep() {
+    if(sessionStorage.getItem("expired_curlest_page") == "inv") {
+        return;
+    }
+
     //get api key
     jFetch(`${location.href}api/key`, {}, (data) => {
         setGlobalConstant("API_KEY", data.key);
     });
 
-    //get image
+    //get last uploaded image
     bFetch(`${location.href}api/cdn/${stringDecode(document.cookie, ",")["key"]}`, {}, (data) => {
         window["uploadedImageUrl"] = data;
     });
@@ -15,7 +21,7 @@ function prep() {
             clearInterval(inte);
             main();
         }
-    }, 100);
+    }, 30);
 }
 function main() {
     //use quagga with image above to get upc
@@ -62,15 +68,50 @@ function searchByUPC(upc, callback) {
 }
 
 function addToPantry(product) {
-    jFetch(`${location.href}api/pantry/add`, {
+    let item = {
         item_id: product.id,
         name: product.title,
         quantity: 1,
         image: product.image,
         upc: product.upc
-    }, (data) => {
-        console.log("added to pantry, here is response data:", data);
+    };
+
+    //see if object exists
+    jFetch(`${location.href}api/pantry/get`, {}, (data) => {
+        let inventory = JSON.parse(data);
+        console.log("got inventory", inventory);
+
+        if(inventory[product.id]) {
+            //if it already exists, add to it
+            modifyItemCount(product.id, 1);
+        }
+        else {
+            //if it doesn't already exist, add it to the pantry
+            jFetch(`${location.href}api/pantry/add`, item, (data) => {
+                console.log("added item", item);
+            });
+        }
+
+        sessionStorage.setItem("expired_curlest_page", "inv");
+        //update page
+        location.reload();
     });
+}
+function modifyItemCount(id, amt) {
+    if(amt == 0) {
+        return;
+    }
+
+    //change db
+    jFetch(`${location.href}api/pantry/item/add`, {
+        id: id,
+        num: amt
+    }, (data) => {
+        console.log("modified item", id, amt);
+    });
+
+    //change local view
+    //location.reload();
 }
 
 window.addEventListener("load", prep);

@@ -8,6 +8,7 @@ import datetime
 from fastapi import HTTPException, Form, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from jinja2 import Environment, FileSystemLoader
+import requests
 
 app = fastapi.FastAPI(docs_url="/api/documentation", redoc_url=None)
 templates = Environment(loader=FileSystemLoader('templates'))
@@ -29,17 +30,16 @@ def create_item(id, nm, qt, pic, upc):
     r = random.randint(91,547)
     date = datetime.datetime.now()
     exp_d = date + datetime.timedelta(days=r)
-    c
     return {id: {
-            "item_id": id, 
-            "name": nm, 
-            "quantity": qt, 
+            "item_id": id,
+            "name": nm,
+            "quantity": qt,
             "image": pic,
-            "upc": upc, 
+            "upc": upc,
             "date_added": str(date.year) + "/" + str(date.month) + "/" + str(date.day),
             "expiration_date": str(exp_d.year) + "/" + str(exp_d.month) + "/" + str(exp_d.day)
             }}
-    
+
 
 @app.api_route("/", methods=["GET"], response_class=fastapi.responses.HTMLResponse)
 def root(request: fastapi.Request):
@@ -61,7 +61,7 @@ def root(request: fastapi.Request):
             l = []
             for i in z:
                 l.append(z[i])
-            
+
 
             return templates.get_template('inventory.html').render({"items": l})
         except Exception as e:
@@ -71,13 +71,13 @@ def root(request: fastapi.Request):
 
 @app.api_route("/users/login", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
 def login(response: fastapi.Response, request: fastapi.Request, email: str = Form(...), password: str = Form(...)):
-    
+
     j = users_db.fetch({"email": str(email.lower())})
 
     if j.count == 1:
         x = bcrypt.checkpw(password.encode(), j.items[0]['password'].encode())
         user = j.items[0]
-        
+
         if x == True:
             response.set_cookie(key="key", value=user['key'])
             return templates.get_template("redirect.html").render({"url": "/"})
@@ -100,7 +100,7 @@ def render_login(request: fastapi.Request):
 
     else:
         return templates.get_template('redirect.html').render({"url": "/"})
-    
+
 
 @app.api_route("/users/recipes", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
 async def recipes(request: fastapi.Request, response: fastapi.Response, item: str = Form(...)):
@@ -120,13 +120,13 @@ async def recipes(request: fastapi.Request, response: fastapi.Response, item: st
             l = []
             for i in z:
                 l.append(z[i])
-            
+
 
             return templates.get_template('recipes.html').render({"items": l})
         except Exception as e:
             print(e)
             return templates.get_template('recipes.html').render({"items": []})
-        
+
 
 @app.api_route("/users/register", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
 def register(response: fastapi.Response, name: str = Form(...), email: str = Form(...), password: str = Form(...)):
@@ -154,7 +154,7 @@ def register(response: fastapi.Response, name: str = Form(...), email: str = For
 
 @app.api_route("/register", methods=["GET"], response_class=fastapi.responses.HTMLResponse)
 def render_register(request: fastapi.Request):
-    
+
     k = request.cookies.get("key")
 
     if k is None:
@@ -162,7 +162,7 @@ def render_register(request: fastapi.Request):
 
     else:
         return templates.get_template("redirect.html", {"request": request, "url": "/"})
-    
+
 @app.api_route("/users/upload", methods=["GET"], response_class=fastapi.responses.HTMLResponse)
 def render_upload(request: fastapi.Request):
     k = request.cookies.get("key")
@@ -172,7 +172,7 @@ def render_upload(request: fastapi.Request):
 
     else:
         return templates.get_template('upload.html').render()
-    
+
 
 @app.api_route("/users/logout", response_class=fastapi.responses.HTMLResponse)
 async def logout(response: fastapi.Response, request: fastapi.Request):
@@ -185,14 +185,14 @@ async def logout(response: fastapi.Response, request: fastapi.Request):
 @app.api_route("/api/pantry/get", response_class=fastapi.responses.JSONResponse)
 async def pantry(request: fastapi.Request):
     k = request.cookies.get("key")
-    
-    pantry = pantries_db.get(k).items[0]
-    
+
+    pantry = pantries_db.get(k)
+
     if pantry is not None:
         return json.dumps(pantry['items'])
     else:
         return json.dumps([])
-    
+
 
 @app.api_route("/api/pantry/add", response_class=fastapi.responses.JSONResponse)
 async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity: int, image: str, upc: str):
@@ -208,6 +208,22 @@ async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity
             pantries_db.put({"key": k, "items": p})
             return {"error": "NONE","code": 200}
 
+
+@app.api_route("/api/pantry/item/{action}", response_class=fastapi.responses.JSONResponse)
+async def update_count(request: fastapi.Request, action, id: str, num: int):
+    try:
+        for i in pantries_db.fetch().items:
+            if id in i['items']:
+                if action == "add":
+                    i['items'][id]['quantity'] += num
+                elif action == "remove":
+                    i['items'][id]['quantity'] -= num
+                pantries_db.put(i)
+                return {"error": "NONE","code": 200}
+    except Exception as e:
+        print(e)
+        return {"error": "NOT_ALLOWED","code": 455}
+            
 
 @app.api_route("/api/upload", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
 async def upload_img(request: fastapi.Request, file: UploadFile = File(...)):
@@ -230,7 +246,7 @@ async def get_cdn(request: fastapi.Request, key: str):
 
 @app.api_route("/api/key", response_class=fastapi.responses.JSONResponse)
 async def keys(request: fastapi.Request):
-    
+
     ks = ["8d74294d6dfa492f845941e26d98c8e3", "d618860128c54d248fb9784f0e16cfce", "4bd03fd88e404d25993d236476d2cd7e"]
     k = request.cookies.get("key")
 
@@ -238,8 +254,47 @@ async def keys(request: fastapi.Request):
         return {"error": "NOT_ALLOWED","code": 405 ,"key": "NOT_ALLOWED"}
     else:
         return {"error": "NONE","code": 200 ,"key": random.choice(ks)}
-    
-    
+
+@app.api_route("/api/barcode/process", response_class=fastapi.responses.JSONResponse)
+async def process_barcode(barcode: str, key: str):
+    session = requests.Session()
+    if key == "NOT_ALLOWED":
+        return {"success": False}
+    else:
+        ks = ["8d74294d6dfa492f845941e26d98c8e3", "d618860128c54d248fb9784f0e16cfce", "4bd03fd88e404d25993d236476d2cd7e"]
+
+        random_key = random.choice(ks)
+
+        res = session.get(f'https://api.spoonacular.com/food/products/upc/{barcode}?apiKey={random_key}')
+        res = res.json()
+
+
+        if 'status' in res and res['status'] == "failure":
+            return {"success": "NOT_FOUND"}
+        else:
+            items = pantries_db.fetch().items
+            for i in items:
+                if i["key"] == key:
+                    print(res)
+                    i["items"].update(create_item(res["id"], res["title"], 1, res["image"], barcode))
+                    pantries_db.put(i)
+                    return {"success": True}
+
+        return {"success": False}
+
+
+<<<<<<< HEAD
+
 if __name__ == "__main__":
     import uvicorn
+<<<<<<< HEAD
     uvicorn.run("main:app", host="localhost", port=8000, reload=True)
+=======
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+=======
+    
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+>>>>>>> master
+>>>>>>> 90feb1a53d025d8f907860d4cc4eb8d1386188f1
