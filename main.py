@@ -20,8 +20,25 @@ pantries_db = deta.Base("pantries")
 food_photos = deta.Drive("food_photos")
 
 
+
 app.mount("/statics", StaticFiles(directory="statics"), name="statics")
 
+
+def create_item(id, nm, qt, pic, upc):
+    r = random.randint(91,547)
+    date = datetime.datetime.now()
+    exp_d = date + datetime.timedelta(days=r)
+    
+    return {id: {
+            "item_id": id, 
+            "name": nm, 
+            "quantity": qt, 
+            "image": pic,
+            "upc": upc, 
+            "date_added": str(date.day) + "/" + str(date.month) + "/" + str(date.year),
+            "expiration_date": str(exp_d.day) + "/" + str(exp_d.month) + "/" + str(exp_d.year)
+            }}
+    
 
 @app.api_route("/", methods=["GET"], response_class=fastapi.responses.HTMLResponse)
 def root(request: fastapi.Request):
@@ -37,8 +54,18 @@ def root(request: fastapi.Request):
         except Exception as e:
             print(e)
             raise HTTPException(status_code=422, detail="Something went wrong")
+        try:
+            x = pantries_db.fetch({"key": k}).items[0]
+            z = x['items']
+            l = []
+            for i in z:
+                l.append(z[i])
+            
 
-        return templates.get_template('inventory.html').render({"items": [1, 2, 3, 4, 5, 6, 7]})
+            return templates.get_template('inventory.html').render({"items": l})
+        except Exception as e:
+            print(e)
+            return templates.get_template('inventory.html').render({"items": []})
 
 
 @app.api_route("/users/login", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
@@ -89,7 +116,7 @@ def register(response: fastapi.Response, name: str = Form(...), email: str = For
 
             u = {"key": key, "name": name, "email": email.lower(), "password": hashed_p.decode()}
             users_db.put(u)
-            pantries_db.put({"key": key, "items": []})
+            pantries_db.put({"key": key, "items": {}})
 
             response.set_cookie(key="key", value=u['key'])
             return templates.get_template("redirect.html").render({"url": "/"})
@@ -141,32 +168,17 @@ async def pantry(request: fastapi.Request):
     
 
 @app.api_route("/api/pantry/add", response_class=fastapi.responses.JSONResponse)
-async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity: int, image: str, upc: str, item_type: str):
+async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity: int, image: str, upc: str):
     #add current date, and expiration date
     #item_ID, name, quantity, image, upc, name, quantity, image, upc
     k = request.cookies.get("key")
     if k is None:
         return {"error": "NOT_ALLOWED","code": 455}
     else:
-        p = pantries_db.get(k).items[0]['items']
+        p = pantries_db.fetch({"key":k}).items[0]["items"]
         if p is not None:
-            r = random.randint(91,547)
-            date = datetime.datetime.now()
-            exp_d = date + datetime.timedelta(days=r)
-            itm = {
-                   "item_id": item_id, 
-                   "type": item_type,
-                   "name": name, 
-                   "quantity": quantity, 
-                   "image": image,
-                   "upc": upc, 
-                   "date_added": date.day + "/" + date.month + "/" + date.year,
-                   "expiration_date": exp_d.day + "/" + exp_d.month + "/" + exp_d.year
-                   }
-                
-            p.append(itm)
+            p.update(create_item(item_id, name, quantity, image, upc))
             pantries_db.put({"key": k, "items": p})
-            
             return {"error": "NONE","code": 200}
 
 
