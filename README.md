@@ -7,7 +7,9 @@
 - The biggest problem for food wasting comes from households. 43% of waste is from homes and with expired we are able to solve this issue.
 - Through this project, we learned that Raspberry Pi is more difficult to implement than we thought, but we powered through and innovated alternatives.
 
+
 ![Alt text](/statics/img/4.png?raw=true "Optional Title")
+<img src="4.png" alt="drawing" width="100"/>
 
 ## Table of Contents
 
