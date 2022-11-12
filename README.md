@@ -33,11 +33,11 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
-Collaborators: 
+Collaborators: https://null.cards
 
-Roberto Aguero: \
+Roberto Aguero: https://github.com/tif1975  \
 Matthew Anderson: https://github.com/notmatthewa   \
-Carlos Hernandez: \
+Carlos Hernandez: https://github.com/hernandezcu \
 Carlos Borjes: \
 Justin Phu: \
 Rithyka (Kenshin): 
