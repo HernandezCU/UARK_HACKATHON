@@ -274,7 +274,7 @@ async def process_barcode(barcode: str, key: str):
 
 
         if 'status' in res and res['status'] == "failure":
-            return {"success": "NOT_FOUND"}
+            return {"success": False}
         else:
             items = pantries_db.fetch().items
             for i in items:
