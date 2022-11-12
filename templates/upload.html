@@ -10,24 +10,26 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="img-container" style="
-				display: flex;
-				width: 100%;
-				align-items: center;
-				justify-content: center;
-				box-sizing: border-box;
-			">
-				<img id="img" style="max-width: 80%; max-height: 50%;
-				margin: 1vw;"/>
+			<div class="img-container">
+				<img
+					id="img"
+					style="max-width: 80%; max-height: 50%; margin: 1vw"
+				/>
 			</div>
-			<form action="/api/upload" enctype="multipart/form-data" method="post" style="
+			<form
+				action="/api/upload"
+				enctype="multipart/form-data"
+				method="post"
+				style="
 					display: flex;
 					flex-direction: column;
 					align-content: center;
 					align-items: center;
 					justify-content: center;
-				" id="form">
-				<img id="img"/>
+				"
+				id="form"
+			>
+				<img id="img" />
 				<label for="file" class="file-upload"> Choose File </label>
 				<input id="file" name="file" type="file" /><br />
 				<label for="submit" class="submit"> Submit </label>
