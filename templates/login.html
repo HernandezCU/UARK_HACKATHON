@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>Login</title>
+		<link rel="stylesheet" href="../statics/css/login.css" />
+		<link rel="stylesheet" href="https://use.typekit.net/ocf5mhq.css" />
+	</head>
 
-<head>
-    <title>Login</title>
-</head>
+	<body>
+		<div id="login">
+			<span id="title">Log-in</span><br /><br />
+			<form
+				class="user"
+				action="/users/login"
+				enctype="multipart/form-data"
+				method="post"
+			>
+				<input
+					class=""
+					type="text"
+					id="email"
+					placeholder="Email"
+					name="email"
+					required
+				/><br /><br />
+				<input
+					class=""
+					type="password"
+					id="password"
+					placeholder="Password"
+					name="password"
+					required
+				/><br /><br />
+				<button class="login-button" type="submit">Log-in</button>
+			</form>
+			<br />
+			<span>
+				Dont have an account?
+				<a id="signUp" href="./register.html"> Sign Up </a>
+			</span>
+		</div>
 
-<body>
-    <header>Login</header>
-    <div id="login">
-        <form class="user" action="/users/login" enctype="multipart/form-data" method="post">
-            <input class="" type="text" id="email" placeholder="Email"
-                name="email" required>
-            <input class="" type="password" id="password" placeholder="Password"
-                name="password" required>
-            <button class="" type="submit">Login</button>
-        </form>
-        <p>Dont have an account? <button id="signUp" onclick="location.href='/register';">Sign Up</button></p>
-    </div>
-    
-    <script src=""></script>
-</body>
-
+		<script src=""></script>
+	</body>
 </html>
