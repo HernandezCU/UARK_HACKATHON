@@ -37,15 +37,15 @@
 		</div>
 		<div class="items-ctn">
 			{%for item in items%}
-			<div class="item" id="recipe-click"
-				onclick="findRecipesFor('{{item['name']}}');">
+			<div class="item">
 				<div
-					class="item-img"
+					class="item-img" id="recipe-click"
 					style="
 							background: url('{{item['image']}}');
 							background-position: 40% 40%;
 							background-size: cover;
 						"
+						onclick="findRecipesFor('{{item['name']}}');"
 				></div>
 				<div class="item-desc item-name">{{item['name']}}</div>
 				<div class="item-desc item-exp">
