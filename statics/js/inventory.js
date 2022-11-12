@@ -65,7 +65,6 @@ function searchByUPC(upc, callback) {
 }
 
 function addToPantry(product) {
-    //~ condition to return here
     if(sessionStorage.getItem("expired_curlest_page") == "inv") {
         return;
     }
@@ -98,6 +97,20 @@ function addToPantry(product) {
             //update page
             location.reload();
         });
+    });
+}
+
+function removeFromPantry() {
+    let item = {
+        item_id: 120074,
+        name: "",
+        quantity: 0,
+        image: "",
+        upc: ""
+    };
+    jFetch(`${location.href}api/pantry/add`, item, (data) => {
+        console.log("added item", item);
+        console.log("response", data);
     });
 }
 
