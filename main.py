@@ -4,7 +4,8 @@ from deta import Deta
 import secrets
 import bcrypt
 import fastapi
-from fastapi import HTTPException, Form
+import datetime
+from fastapi import HTTPException, Form, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from jinja2 import Environment, FileSystemLoader
 
@@ -16,6 +17,8 @@ deta = Deta("b0j1zima_gUAdFysbwx7adfr7bQ7xRQkvajyp8vxu")
 
 users_db = deta.Base("users")
 pantries_db = deta.Base("pantries")
+food_photos = deta.Drive("food_photos")
+
 
 app.mount("/statics", StaticFiles(directory="statics"), name="statics")
 
@@ -86,6 +89,7 @@ def register(response: fastapi.Response, name: str = Form(...), email: str = For
 
             u = {"key": key, "name": name, "email": email.lower(), "password": hashed_p.decode()}
             users_db.put(u)
+            pantries_db.put({"key": key, "items": []})
 
             response.set_cookie(key="key", value=u['key'])
             return templates.get_template("redirect.html").render({"url": "/"})
@@ -105,6 +109,16 @@ def render_register(request: fastapi.Request):
     else:
         return templates.get_template("redirect.html", {"request": request, "url": "/"})
     
+@app.api_route("/users/upload", methods=["GET"], response_class=fastapi.responses.HTMLResponse)
+def render_upload(request: fastapi.Request):
+    k = request.cookies.get("key")
+
+    if k is None:
+        return templates.get_template('redirect.html').render({"url": "/login"})
+
+    else:
+        return templates.get_template('upload.html').render()
+    
 
 @app.api_route("/users/logout", response_class=fastapi.responses.HTMLResponse)
 async def logout(response: fastapi.Response, request: fastapi.Request):
@@ -113,25 +127,76 @@ async def logout(response: fastapi.Response, request: fastapi.Request):
     return templates.get_template("redirect.html").render({"url": "/"})
 
 
-@app.api_route("/users/pantry", response_class=fastapi.responses.HTMLResponse)
+#FE USE ONLY
+@app.api_route("/api/pantry/get", response_class=fastapi.responses.JSONResponse)
 async def pantry(request: fastapi.Request):
-    pass
+    k = request.cookies.get("key")
+    
+    pantry = pantries_db.get(k).items[0]
+    
+    if pantry is not None:
+        return json.dumps(pantry['items'])
+    else:
+        return json.dumps([])
+    
+
+@app.api_route("/api/pantry/add", response_class=fastapi.responses.JSONResponse)
+async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity: int, image: str, upc: str, item_type: str):
+    #add current date, and expiration date
+    #item_ID, name, quantity, image, upc, name, quantity, image, upc
+    k = request.cookies.get("key")
+    if k is None:
+        return {"error": "NOT_ALLOWED","code": 455}
+    else:
+        p = pantries_db.get(k).items[0]['items']
+        if p is not None:
+            r = random.randint(91,547)
+            date = datetime.datetime.now()
+            exp_d = date + datetime.timedelta(days=r)
+            itm = {
+                   "item_id": item_id, 
+                   "type": item_type,
+                   "name": name, 
+                   "quantity": quantity, 
+                   "image": image,
+                   "upc": upc, 
+                   "date_added": date.day + "/" + date.month + "/" + date.year,
+                   "expiration_date": exp_d.day + "/" + exp_d.month + "/" + exp_d.year
+                   }
+                
+            p.append(itm)
+            pantries_db.put({"key": k, "items": p})
+            
+            return {"error": "NONE","code": 200}
 
 
-@app.api_route("/users/pantry/add", response_class=fastapi.responses.HTMLResponse)
+@app.api_route("/api/upload", response_class=fastapi.responses.JSONResponse)
+async def upload_img(request: fastapi.Request, file: UploadFile = File(...)):
+    k = request.cookies.get("key")
+    name = file.filename
+    f = file.file
+    res = food_photos.put(name, f)
+    return res
 
 
-#FE USAGE ONLY
+@app.api_route("api/cdn", response_class=fastapi.responses.JSONResponse)
+async def get_cdn(request: fastapi.Request):
+    k = request.cookies.get("key")
+    if k is None:
+        return {"error": "NOT_ALLOWED","code": 455}
+    else:
+        res = food_photos.get(str(k) + ".png")
+        return fastapi.responses.StreamingResponse(res.iter_chunks(1024), media_type="image/png")
+
+
 @app.api_route("/api/key", response_class=fastapi.responses.JSONResponse)
 async def keys(request: fastapi.Request):
     
     ks = ["8d74294d6dfa492f845941e26d98c8e3", "d618860128c54d248fb9784f0e16cfce", "4bd03fd88e404d25993d236476d2cd7e"]
-        
     k = request.cookies.get("key")
 
     if k is None:
-        return {"error": "NOT ALLOWED","code": 405 ,"key": "NOT ALLOWED"}
-
+        return {"error": "NOT_ALLOWED","code": 405 ,"key": "NOT_ALLOWED"}
     else:
         return {"error": "NONE","code": 200 ,"key": random.choice(ks)}
     
