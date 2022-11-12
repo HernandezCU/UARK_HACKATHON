@@ -7,9 +7,7 @@
 - The biggest problem for food wasting comes from households. 43% of waste is from homes and with expired we are able to solve this issue.
 - Through this project, we learned that Raspberry Pi is more difficult to implement than we thought, but we powered through and innovated alternatives.
 
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
+## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -18,7 +16,7 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 ## Installation
 
-For now, the way to access our project is to go to: [EXPIRED WEBAPP](expired.deta.dev)
+For now, the way to access our project is to go to: [EXPIRED WEBAPP](https://expired.deta.dev)
 The scanning portion of this project will only run locally on our iPhones, but we will implement a feature so that it can be run on all devices.
 
 ## Usage
