@@ -1,11 +1,11 @@
-if ($(window).width() / $(window).height() < 1.5) {
+if ($(window).width() / $(window).height() < 1.7) {
 	$("#scroll-ctn").css("opacity", "0");
 } else {
 	$("#scroll-ctn").css("opacity", "1");
 }
 
 $(window).resize(function () {
-	if ($(window).width() / $(window).height() < 1.5) {
+	if ($(window).width() / $(window).height() < 1.7) {
 		$("#scroll-ctn").css("opacity", "0");
 	} else {
 		$("#scroll-ctn").css("opacity", "1");
