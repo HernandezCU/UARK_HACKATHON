@@ -1,7 +1,40 @@
+
+@keyframes fadein{
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes arrowbounce{
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(1vw);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+html{
+	background: linear-gradient(0deg, #000, #fff);
+	box-sizing: border-box;
+}
+
 body {
+	overflow-y: scroll;
 	font-family: forma-djr-display, sans-serif;
 	font-weight: bold;
 	margin: 0;
+	overflow-x: hidden;
+	position: relative;
+	min-height: 200vh;
+	width: 100vw;
+	display: block;
 }
 
 body::-webkit-scrollbar {
@@ -14,7 +47,7 @@ a {
 }
 
 .icon {
-	width: 2vw;
+	width: 3.5vw;
 	margin-right: 0;
 	position: relative;
 	bottom: 0.2vw;
@@ -23,7 +56,7 @@ a {
 #name {
 	position: relative;
 	bottom: 0.4vw;
-	font-size: 3vw;
+	font-size: 4vw;
 }
 
 .star {
@@ -38,10 +71,9 @@ a {
 }
 
 .nav {
-	font-size: 1.5vw;
-	position: absolute;
-	top: 5vw;
-	left: 10vw;
+	font-size: 3.5vw;
+	padding-left: 10vw;
+	padding-top: 5vw;
 }
 
 .nav-item {
@@ -61,27 +93,29 @@ a {
 
 .title {
 	font-size: 10vw;
-	position: absolute;
-	top: 12vw;
-	left: 10vw;
+	padding-top: 5vw;
+	padding-left: 10vw;
 	line-height: 10vw;
-	z-index: 1;
 }
 
 .try {
+	display: flex;
+	width: 100%;
+	padding-left: 10vw;
+	padding-top: 4vw;
+	box-sizing: border-box;
+}
+
+.try > a {
 	font-size: 3vw;
 	padding: 1vw 2vw;
 	border-radius: 1vw;
 	color: #f1f1f1;
 	background: #1f1f1f;
-	position: absolute;
-	top: 35vw;
-	left: 10vw;
 	transition: background 200ms;
-	z-index: 1;
 }
 
-.try:hover {
+.try > a:hover {
 	cursor: pointer;
 	color: #1f1f1f;
 	background: #f1f1f1;
@@ -89,72 +123,104 @@ a {
 
 #scroll-ctn {
 	font-size: 2vw;
-	font-weight: 100;
-	text-align: center;
-	position: absolute;
-	top: calc(35 / 64 * 100vw - 12vw);
-	left: 50%;
-	transform: translateX(-50%);
-	z-index: 1;
+    font-weight: 100;
+    text-align: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+	animation: fadein 1s;
+	margin-bottom: 5vw;
 }
 
 .arrow {
 	width: 2vw;
+	animation: arrowbounce 2s infinite ease-in-out;
 }
 
 .window-2 {
-	position: absolute;
-	top: calc(3 / 16 * 100vw);
 	left: 0;
-	width: 100vw;
-	height: calc(15 / 16 * 100vw);
-	background: linear-gradient(0deg, #000, #fff);
+    width: 100%;
+    overflow: hidden;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+	margin-top: 20vw;
 }
 
 #desc-2 {
 	font-size: 3vw;
-	width: 37.5vw;
-	position: absolute;
-	top: 28.5vw;
-	left: 10vw;
+	width: 50%;
+	position: relative;
+	display: flex;
+	padding: 2vw;
+	padding-left: 0;
+	box-sizing: border-box;
 }
 
-.window-3 {
-	position: absolute;
-	top: calc(9 / 16 * 2 * 100vw);
-	left: 0;
-	width: 100vw;
-	height: calc(9 / 16 * 100vw);
-	background: #000;
+.screenshot{
+	width: 50%;
+	padding: 2vw;
+	box-sizing: border-box;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .screenshot1,
 .screenshot2 {
 	opacity: 0;
-	box-shadow: rgba(0, 0, 0, 0.5) 0 2vw 8vw 0;
+	box-shadow: rgba(0, 0, 0, 0.1) 0 7px 7px 8px;
 	border-radius: 2vw;
-	position: absolute;
+	transition: 1000ms;
+	width: 100%;
+}
+
+
+.screenshot1{
+	transform: translateX(50vw);
 	transition: 1000ms;
 }
 
-.screenshot1 {
-	width: 35vw;
-	right: -40vw;
-	top: 36vw;
+.screenshot2{
+	transform: translateX(-50vw);
+	transition: 1000ms;
 }
 
 .screenshot1.toggled {
 	opacity: 0.75;
-	right: 10vw;
-}
-
-.screenshot2 {
-	width: 35vw;
-	left: -40vw;
-	top: 50vw;
+	transform: translateX(0);
 }
 
 .screenshot2.toggled {
 	opacity: 0.75;
-	left: 10vw;
+	transform: translateX(0);
+}
+
+.window-3{
+	display: flex;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    height: 100vh;
+    overflow: hidden;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+#start-now{
+	font-size: 6vw;
+	padding: 2vw;
+	border-radius: 1vw;
+	color: #f1f1f1;
+	background: #1f1f1f;
+	transition: background 200ms;
+	font-style: italic;
 }

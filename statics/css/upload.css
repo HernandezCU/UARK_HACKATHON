@@ -10,13 +10,18 @@ input[type="submit"] {
 
 .container {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	padding: 5vw;
-	border-radius: 2vw;
-	background: #f1f1f1;
-	box-shadow: rgba(0, 0, 0, 0.2) 0 2vw 8vw 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5vw;
+    display: flex;
+    border-radius: 2vw;
+    background: #f1f1f1;
+    box-shadow: rgb(0 0 0 / 20%) 0 2vw 8vw 0;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .file-upload,
