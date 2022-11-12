@@ -18,7 +18,7 @@
 
 ## Installation
 
-For now, the way to access our project is to go to: [EXPIRED WEBAPP](https://expired.deta.dev)
+For now, the way to access our project is to go to: [EXPIRED WEBAPP](https://app.null.cards)
 The scanning portion of this project will only run locally on our iPhones, but we will implement a feature so that it can be run on all devices.
 
 ## Usage
