@@ -73,6 +73,7 @@ Badges aren't necessary, per se, but they demonstrate street cred. Badges let ot
 
 ## How to Contribute
 
+If you want to contribute, follow these guidelines: \
 [Contributor Covenant](https://www.contributor-covenant.org/)
 
 ## Tests
