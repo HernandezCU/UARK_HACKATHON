@@ -1,0 +1,65 @@
+body {
+	font-family: forma-djr-display, sans-serif;
+	font-weight: bold;
+	background: #f1f1f1;
+}
+
+#upload-ctn {
+	width: 57.5vw;
+	height: 37.5vw;
+	background: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 5vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 2vw 8vw 0;
+}
+
+#dashed {
+	width: 50vw;
+	height: 30vw;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-style: dashed;
+	border-radius: 3vw;
+	opacity: 0.25;
+	z-index: -1;
+}
+
+input[type="submit"] {
+	background: none;
+	border: none;
+	display: none;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+.file-upload {
+	font-size: 5vw;
+	height: 16vw;
+	width: 40vw;
+	border: 0.1vw solid #ccc;
+	display: inline-block;
+	padding: 0 2vw 1vw 2vw;
+	border-radius: 1vw;
+	cursor: pointer;
+}
+
+.submit-file-upload {
+	font-size: 3vw;
+	width: 40vw;
+	border: 0.1vw solid #ccc;
+	display: inline-block;
+	padding: 1vw 2vw 1vw 2vw;
+	border-radius: 1vw;
+	cursor: pointer;
+}
