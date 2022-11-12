@@ -32,8 +32,8 @@ Collaborators: https://null.cards
 Roberto Aguero: https://github.com/tif1975  \
 Matthew Anderson: https://github.com/notmatthewa   \
 Carlos Hernandez: https://github.com/hernandezcu \
-Carlos Borjes: \
-Justin Phu: \
+Carlos Borjes: https://null.cards/carlosb \
+Justin Phu: https://github.com/flightnasa \
 Rithyka (Kenshin): https://github.com/kenshin7 
 
 APIs: \
