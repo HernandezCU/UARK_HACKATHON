@@ -27,6 +27,7 @@ body {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+	border: #1f1f1f 0.25vw;
 	border-style: dashed;
 	border-radius: 3vw;
 	opacity: 0.25;
@@ -52,6 +53,7 @@ input[type="file"] {
 	padding: 0 2vw 1vw 2vw;
 	border-radius: 1vw;
 	cursor: pointer;
+	transition: background 250ms;
 }
 
 .submit-file-upload {
@@ -62,4 +64,11 @@ input[type="file"] {
 	padding: 1vw 2vw 1vw 2vw;
 	border-radius: 1vw;
 	cursor: pointer;
+	transition: background 250ms;
+}
+
+.submit-file-upload:hover,
+.file-upload:hover {
+	background: #1f1f1f;
+	color: #f1f1f1;
 }
