@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
 	font-family: forma-djr-display, sans-serif;
 	font-weight: bold;
@@ -175,3 +176,188 @@ img:hover {
 	padding: 4vw;
 	overflow-wrap: break-word;
 }
+=======
+body {
+	font-family: forma-djr-display, sans-serif;
+	font-weight: bold;
+	overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+img:hover {
+	cursor: pointer;
+}
+
+.icon {
+	width: 5vw;
+}
+
+#name {
+	position: relative;
+	bottom: 0.4vw;
+	font-size: 6vw;
+}
+
+.nav {
+	position: absolute;
+	top: 6.5vw;
+	left: 7vw;
+}
+
+.inventory {
+	position: absolute;
+	top: 4.6vw;
+	right: 14vw;
+	font-size: 8vw;
+}
+
+.sign-out {
+	width: 5vw;
+	position: absolute;
+	top: 6.6vw;
+	right: 7vw;
+}
+
+.search-ctn {
+	position: absolute;
+	top: 18vw;
+	left: 7vw;
+}
+
+.search {
+	font-family: forma-djr-display, sans-serif;
+	font-size: 2.5vw;
+	height: 5vw;
+	width: 80vw;
+	background: #f1f1f1;
+	border: none;
+	border-radius: 2vw;
+	padding: 1vw 3vw;
+}
+
+.search-icon {
+	width: 4vw;
+	position: absolute;
+	top: 1.5vw;
+	right: 8vw;
+	opacity: 0.5;
+}
+
+.upload-icon {
+	width: 4vw;
+	position: absolute;
+	top: 1.5vw;
+	right: 2vw;
+	opacity: 0.5;
+}
+
+.search-icon:hover,
+.upload-icon:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+
+.items-ctn {
+	width: 86vw;
+	position: absolute;
+	top: 30vw;
+	left: 7vw;
+}
+
+.item {
+	width: 86vw;
+	height: 30vw;
+	position: relative;
+	border-radius: 2vw;
+}
+
+.item-img {
+	width: inherit;
+	height: 20vw;
+	border-radius: 2vw;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.item-img:hover {
+	cursor: pointer;
+}
+
+.item-desc {
+	font-size: 2vw;
+	position: absolute;
+	top: 22vw;
+}
+
+.item-desc:not(.item-name) {
+	opacity: 0.5;
+}
+
+.item-name {
+	left: 0;
+}
+
+.item-amount {
+	left: 0;
+	top: 25vw;
+}
+
+.item-exp {
+	color: red !important;
+	opacity: 1 !important;
+	right: 0;
+}
+
+/* CSS for recipe.html */
+
+.nav-vis {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 20vw;
+	width: 100vw;
+	z-index: -1;
+}
+
+.recipe-food {
+	position: absolute;
+	top: 20vw;
+	left: 0;
+	height: 40vw;
+	width: 100vw;
+	background: url("../img/banana.jpg");
+	background-size: cover;
+	background-position: 40% 40%;
+}
+
+.recipe-name {
+	position: absolute;
+	top: 60vw;
+	left: 0;
+	height: 12vw;
+	width: 100vw;
+	background: #1f1f1f;
+	color: #f1f1f1;
+	font-size: 10vw;
+	padding: 4vw;
+}
+
+.recipe-requirements {
+	position: absolute;
+	top: 72vw;
+	left: 5vw;
+	height: 12vw;
+	width: 90vw;
+	font-size: 10vw;
+	padding: 4vw;
+	overflow-wrap: break-word;
+}
+
+#recipe-click {
+	cursor: hand;
+}
+>>>>>>> 1c20891c6a0c8ac6430564b3e0cf4a09af4eaaf2

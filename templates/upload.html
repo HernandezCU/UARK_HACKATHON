@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -39,3 +40,46 @@
 		</div>
 	</body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="https://use.typekit.net/ocf5mhq.css" />
+		<link rel="stylesheet" href="../statics/css/upload.css" />
+		<title>Upload</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="img-container">
+				<img
+					id="img"
+					style="max-width: 80%; max-height: 50%; margin: 1vw"
+				/>
+			</div>
+			<form
+				action="/api/upload"
+				enctype="multipart/form-data"
+				method="post"
+				style="
+					display: flex;
+					flex-direction: column;
+					align-content: center;
+					align-items: center;
+					justify-content: center;
+				"
+				id="form"
+			>
+				<img id="img" />
+				<label for="file" class="file-upload"> Choose File </label>
+				<input id="file" name="file" type="file" /><br />
+				<label for="submit" class="submit"> Submit </label>
+				<input id="submit" type="submit" />
+			</form>
+			<script src="../statics/js/upload.js"></script>
+		</div>
+	</body>
+</html>
+>>>>>>> 1c20891c6a0c8ac6430564b3e0cf4a09af4eaaf2

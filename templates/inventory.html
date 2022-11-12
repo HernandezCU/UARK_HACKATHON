@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -67,3 +68,84 @@
 		<script src="../statics/js/inventory.js"></script>
 	</body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="https://use.typekit.net/ocf5mhq.css" />
+		<link rel="stylesheet" href="../statics/css/inventory.css" />
+		<script
+			src="https://code.jquery.com/jquery-3.6.1.min.js"
+			integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+			crossorigin="anonymous"
+		></script>
+		<script src="../statics/js/quagga.js"></script>
+		<script src="../statics/js/utils.js"></script>
+		<title>Inventory</title>
+	</head>
+	<body>
+		<div class="nav">
+			<img class="icon" src="../statics/img/icon.png" />
+			<span id="name">ex<span style="color: red">pi</span>red.</span>
+		</div>
+		<span class="inventory">inventory</span>
+		<img
+			class="sign-out"
+			src="../statics/img/sign-out.png"
+			onclick="location.href = '/users/logout';"
+		/>
+		<div class="search-ctn">
+			<input type="text" class="search" placeholder="Search..." />
+			<img class="search-icon" src="../statics/img/search.png" />
+			<img
+				class="upload-icon"
+				src="../statics/img/upload.png"
+				onclick="location.href = '/users/upload';"
+			/>
+		</div>
+		<div class="items-ctn">
+			{%for item in items%}
+			<div class="item">
+				<div
+					class="item-img" id="recipe-click"
+					style="
+							background: url('{{item['image']}}');
+							background-position: 40% 40%;
+							background-size: cover;
+						"
+						onclick="findRecipesFor('{{item['name']}}');"
+				></div>
+				<div class="item-desc item-name">{{item['name']}}</div>
+				<div class="item-desc item-exp">
+					Expiry Date: {{item['expiration_date']}}
+				</div>
+				<div class="item-desc item-amount">
+					Amount: {{item['quantity']}}
+				</div>
+				<div
+					class="buttons-ctn"
+					style="position: relative; bottom: 1vw"
+				>
+					<button
+						class="mod-btn"
+						onclick="modifyItemCount({{ item['item_id'] }}, +1);"
+					>
+						⇧
+					</button>
+					<button
+						class="mod-btn"
+						onclick="modifyItemCount({{ item['item_id'] }}, -1);"
+					>
+						⇩
+					</button>
+				</div>
+			</div>
+			{%endfor%}
+		</div>
+		<script src="../statics/js/inventory.js"></script>
+	</body>
+</html>
+>>>>>>> 1c20891c6a0c8ac6430564b3e0cf4a09af4eaaf2
