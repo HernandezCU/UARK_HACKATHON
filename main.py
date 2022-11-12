@@ -288,7 +288,7 @@ async def process_barcode(barcode: str, key: str):
 
 
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="localhost", port=8000, reload=True)
- #120074, 3
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("main:app", host="localhost", port=8000, reload=True)
+
