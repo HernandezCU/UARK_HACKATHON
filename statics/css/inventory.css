@@ -109,7 +109,7 @@ img:hover {
 }
 
 .item-desc {
-	font-size: 3.5vw;
+	font-size: 2vw;
 	position: absolute;
 	top: 22vw;
 }
@@ -123,6 +123,11 @@ img:hover {
 }
 
 .item-amount {
+	left: 0;
+	top: 25vw;
+}
+
+.item-exp {
 	right: 0;
 }
 

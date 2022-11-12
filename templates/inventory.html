@@ -36,18 +36,21 @@
 		</div>
 		<div class="items-ctn">
 			{%for item in items%}
-				<div class="item">
-					<div
-						class="item-img"
-						style="
+			<div class="item">
+				<div
+					class="item-img"
+					style="
 							background: url('{{item['image']}}');
 							background-position: 40% 40%;
 							background-size: cover;
 						"
-					></div>
-					<div class="item-desc item-name">{{item['name']}}</div>
-					<div class="item-desc item-amount">Amount: {{item['quantity']}}</div>
+				></div>
+				<div class="item-desc item-name">{{item['name']}}</div>
+				<div class="item-desc item-exp">Expiry Date:</div>
+				<div class="item-desc item-amount">
+					Amount: {{item['quantity']}}
 				</div>
+			</div>
 			{%endfor%}
 		</div>
 		<script src="../statics/js/inventory.js"></script>
