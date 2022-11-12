@@ -1,4 +1,5 @@
 import json
+import random
 from deta import Deta
 import secrets
 import bcrypt
@@ -35,7 +36,7 @@ def root(request: fastapi.Request):
             print(e)
             raise HTTPException(status_code=422, detail="Something went wrong")
 
-        return templates.get_template('inventory.html').render()
+        return templates.get_template('inventory.html').render({"items": [1, 2, 3, 4, 5, 6, 7]})
 
 
 @app.api_route("/users/login", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
@@ -48,16 +49,15 @@ def login(response: fastapi.Response, request: fastapi.Request, email: str = For
         user = j.items[0]
         
         if x == True:
-            response = templates.get_template("redirect.html").render()
             response.set_cookie(key="key", value=user['key'])
-            return response
+            return templates.get_template("redirect.html").render({"url": "/"})
 
         else:
-            response = templates.TemplateResponse("redirect.html", {"request": request, "url": "/login"})
+            response = templates.get_template("redirect.html").render({"url": "/login"})
             return response
 
     else:
-        response = templates.TemplateResponse("redirect.html", {"request": request, "url": "/login"})
+        response = templates.get_template("redirect.html").render({"url": "/login"})
         return response
 
 
@@ -89,8 +89,7 @@ def register(response: fastapi.Response, name: str = Form(...), email: str = For
             users_db.put(u)
 
             response.set_cookie(key="key", value=u['key'])
-            response = templates.get_template("redirect.html").render({"url": "/"})
-            return response
+            return templates.get_template("redirect.html").render({"url": "/"})
 
         except Exception as e:
             return templates.get_template('redirect.html').render({"url": "/register"})
@@ -112,11 +111,31 @@ def render_register(request: fastapi.Request):
 @app.get("/users/logout", response_class=fastapi.responses.HTMLResponse)
 async def logout(response: fastapi.Response, request: fastapi.Request):
 
-    response = templates.get_template("redirect.html").render({"url": "/"})
+    
     response.delete_cookie("key", path="/")
-    return response
+    return templates.get_template("redirect.html").render({"url": "/"})
 
 
+@app.get("/users/pantry", response_class=fastapi.responses.HTMLResponse)
+async def pantry(request: fastapi.Request):
+    pass
+
+
+@app.get("/api/key", response_class=fastapi.responses.JSONResponse)
+async def keys(request: fastapi.Request):
+    
+    ks = ["8d74294d6dfa492f845941e26d98c8e3", "d618860128c54d248fb9784f0e16cfce", "4bd03fd88e404d25993d236476d2cd7e"]
+    
+        
+    k = request.cookies.get("key")
+
+    if k is None:
+        return {"error": "NOT ALLOWED","code": 405 ,"key": "NOT ALLOWED"}
+
+    else:
+        return {"error": "NONE","code": 200 ,"key": random.choice(ks)}
+    
+    
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="localhost", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
