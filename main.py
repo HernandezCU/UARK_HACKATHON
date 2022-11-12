@@ -182,14 +182,10 @@ async def upload_img(request: fastapi.Request, file: UploadFile = File(...)):
         return res
 
 
-@app.api_route("/api/cdn", response_class=fastapi.responses.JSONResponse)
-async def get_cdn(request: fastapi.Request):
-    k = request.cookies.get("key")
-    if k is None:
-        return {"error": "NOT_ALLOWED","code": 455}
-    else:
-        res = food_photos.get(str(k) + ".png")
-        return fastapi.responses.StreamingResponse(res.iter_chunks(1024), media_type="image/png")
+@app.api_route("/api/cdn/{key}", response_class=fastapi.responses.JSONResponse)
+async def get_cdn(request: fastapi.Request, key: str):
+    res = food_photos.get(key + ".png")
+    return fastapi.responses.StreamingResponse(res.iter_chunks(1024), media_type="image/png")
 
 
 @app.api_route("/api/key", response_class=fastapi.responses.JSONResponse)
