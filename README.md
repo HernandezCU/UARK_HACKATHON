@@ -1,13 +1,11 @@
 # <EXPIRED>
 
-## Description
+## EXPIRED: Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+- The purpose of this project? UARK 2022 FALL HACKATHON! Additionally, we all enjoy coding and so building EXPIRED was an enjoyment as a team.
+- What is EXPIRED? This is a pantry tracker smart home device which runs on a mobile device. It captures information through a camera and uses a UCP API to gather data. This data is then sent to a web app that is ran on a cellular device to be able to track information, expiry dates, and recipes. This allows the user to check their pantry away from home and innovates the theme with a sustainability aspect.
+- The biggest problem for food wasting comes from households. 43% of waste is from homes and with expired we are able to solve this issue.
+- Through this project, we learned that Raspberry Pi is more difficult to implement than we thought, but we powered through and innovated alternatives.
 
 ## Table of Contents (Optional)
 
