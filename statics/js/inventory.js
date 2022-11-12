@@ -66,7 +66,9 @@ function searchByUPC(upc, callback) {
 
 function addToPantry(product) {
     //~ condition to return here
-    //
+    if(sessionStorage.getItem("expired_curlest_page") == "inv") {
+        return;
+    }
 
     let item = {
         item_id: product.id,
@@ -91,6 +93,10 @@ function addToPantry(product) {
         jFetch(`${location.href}api/pantry/add`, item, (data) => {
             console.log("added item", item);
             console.log("response", data);
+
+            sessionStorage.setItem("expired_curlest_page", "inv");
+            //update page
+            location.reload();
         });
     });
 }
