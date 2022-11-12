@@ -9,7 +9,6 @@ img:hover {
 
 .icon {
 	width: 5vw;
-	margin-right: -0.2vw;
 }
 
 #name {
@@ -59,11 +58,20 @@ img:hover {
 	width: 4vw;
 	position: absolute;
 	top: 1.5vw;
+	right: 8vw;
+	opacity: 0.5;
+}
+
+.upload-icon {
+	width: 4vw;
+	position: absolute;
+	top: 1.5vw;
 	right: 2vw;
 	opacity: 0.5;
 }
 
-.search-icon:hover {
+.search-icon:hover,
+.upload-icon:hover {
 	cursor: pointer;
 	opacity: 1;
 }
