@@ -77,21 +77,20 @@ function addToPantry(product) {
         upc: product.upc
     };
 
-    //get quantity of matching
+    //see if object exists
     jFetch(`${location.href}api/pantry/get`, {}, (data) => {
         let inventory = JSON.parse(data);
-        console.log("get inventory", inventory);
+        console.log("got inventory", inventory);
 
-        let matchingItem = inventory[product.id];
-        if(matchingItem) {
-            console.log("matching item", matchingItem);
-            item.quantity += matchingItem.quantity;
+        //if it already exists, add to it
+        if(inventory[product.id]) {
+            modifyItemCount(product.id, 1);
+            return;
         }
 
-        //actually add the item
+        //if it doesn't already exist, add it to the pantry
         jFetch(`${location.href}api/pantry/add`, item, (data) => {
             console.log("added item", item);
-            console.log("response", data);
 
             sessionStorage.setItem("expired_curlest_page", "inv");
             //update page
@@ -99,19 +98,15 @@ function addToPantry(product) {
         });
     });
 }
+function modifyItemCount(id, amt) {
+    if(amt == 0) {
+        return;
+    }
+    
+    //change db
+    jFetch(`${location.href}api/pantry/item/${amt > 0 ? "add" : "remove"}?id=${id}&num=${amt}`, {}, (data) => {});
 
-function removeFromPantry() {
-    let item = {
-        item_id: 120074,
-        name: "",
-        quantity: 0,
-        image: "",
-        upc: ""
-    };
-    jFetch(`${location.href}api/pantry/add`, item, (data) => {
-        console.log("added item", item);
-        console.log("response", data);
-    });
+    //change local view
 }
 
 window.addEventListener("load", prep);
