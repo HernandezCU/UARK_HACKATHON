@@ -67,6 +67,14 @@ function searchByUPC(upc, callback) {
     });
 }
 
+function reload() {
+    sessionStorage.setItem("expired_curlest_page", "inv");
+
+    //change local values
+    //
+    //location.reload();
+}
+
 function addToPantry(product) {
     let item = {
         item_id: product.id,
@@ -89,12 +97,9 @@ function addToPantry(product) {
             //if it doesn't already exist, add it to the pantry
             jFetch(`${location.href}api/pantry/add`, item, (data) => {
                 console.log("added item", item);
+                reload();
             });
         }
-
-        sessionStorage.setItem("expired_curlest_page", "inv");
-        //update page
-        location.reload();
     });
 }
 function modifyItemCount(id, amt) {
@@ -107,11 +112,9 @@ function modifyItemCount(id, amt) {
         id: id,
         num: amt
     }, (data) => {
-        console.log("modified item", id, amt);
+        console.log("modified", id, amt);
+        reload();
     });
-
-    //change local view
-    //location.reload();
 }
 
 window.addEventListener("load", prep);
