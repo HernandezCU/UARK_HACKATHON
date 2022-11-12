@@ -6,12 +6,10 @@ function prep() {
     }
 
     //get api key
-    jFetch(`${location.href}api/key`, {}, (data) => {
-        setGlobalConstant("API_KEY", data.key);
-    });
+    getApiKey();
 
     //get last uploaded image
-    bFetch(`${location.href}api/cdn/${stringDecode(document.cookie, ",")["key"]}`, {}, (data) => {
+    bFetch(`${location.origin}/api/cdn/${stringDecode(document.cookie, ",")["key"]}`, {}, (data) => {
         window["uploadedImageUrl"] = data;
     });
 
@@ -68,11 +66,11 @@ function searchByUPC(upc, callback) {
 }
 
 function reload() {
+    //set state so no refresh loop
     sessionStorage.setItem("expired_curlest_page", "inv");
 
     //change local values
-    //
-    //location.reload();
+    location.reload();
 }
 
 function addToPantry(product) {
@@ -115,6 +113,14 @@ function modifyItemCount(id, amt) {
         console.log("modified", id, amt);
         reload();
     });
+}
+
+function findRecipesFor(ingredient) {
+    //set data
+    sessionStorage.setItem("expired_search_ingredient", ingredient);
+
+    //redirect
+    location.href = "./recipe";
 }
 
 window.addEventListener("load", prep);

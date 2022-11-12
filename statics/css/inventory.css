@@ -175,3 +175,7 @@ img:hover {
 	padding: 4vw;
 	overflow-wrap: break-word;
 }
+
+#recipe-click {
+	cursor: hand;
+}
