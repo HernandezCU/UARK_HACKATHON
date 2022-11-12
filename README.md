@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # <EXPIRED>
 
 ## EXPIRED: Description
