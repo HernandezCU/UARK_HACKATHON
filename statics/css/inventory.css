@@ -3,6 +3,10 @@ body {
 	font-weight: bold;
 }
 
+img:hover {
+	cursor: pointer;
+}
+
 .icon {
 	width: 5vw;
 	margin-right: -0.2vw;
@@ -23,8 +27,15 @@ body {
 .inventory {
 	position: absolute;
 	top: 4.6vw;
-	right: 7vw;
+	right: 14vw;
 	font-size: 8vw;
+}
+
+.sign-out {
+	width: 5vw;
+	position: absolute;
+	top: 6.6vw;
+	right: 7vw;
 }
 
 .search-ctn {
