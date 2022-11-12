@@ -8,6 +8,7 @@ import datetime
 from fastapi import HTTPException, Form, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from jinja2 import Environment, FileSystemLoader
+import requests
 
 app = fastapi.FastAPI(docs_url="/api/documentation", redoc_url=None)
 templates = Environment(loader=FileSystemLoader('templates'))
@@ -238,7 +239,26 @@ async def keys(request: fastapi.Request):
         return {"error": "NOT_ALLOWED","code": 405 ,"key": "NOT_ALLOWED"}
     else:
         return {"error": "NONE","code": 200 ,"key": random.choice(ks)}
+
+@app.api_route("/api/barcode/process", response_class=fastapi.responses.JSONResponse)
+async def process_barcode(barcode: str, key: str):
+    session = requests.Session()
+    if key == "NOT_ALLOWED":
+        return {"success": False}
+    else:
+        session.get("https://api.spoonacular.com/recipes/716429/information?apiKey=8d74294d6dfa492f845941e26d98c8e3&includeNutrition=true")
+        res = session.get("https://api.spoonacular.com/food/products/upc/{barcode}")
     
+        items = pantries_db.fetch().items
+        for i in items:
+            if i["key"] == key:
+                # i["items"].update(create_item(res["id"], res["title"], 1, res["image"], barcode))
+                # pantries_db.put(i)
+                return {"success": True}
+                
+        return {"success": False}
+
+
     
 if __name__ == "__main__":
     import uvicorn
