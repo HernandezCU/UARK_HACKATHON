@@ -6,7 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="https://use.typekit.net/ocf5mhq.css" />
 		<link rel="stylesheet" href="../statics/css/inventory.css" />
-		<script src="../statics/js/inventory.js"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.1.min.js"
+			integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+			crossorigin="anonymous"
+		></script>
+		<script src="../statics/js/inventory-item.js"></script>
 		<title>Welcome</title>
 	</head>
 	<body>
@@ -19,10 +24,20 @@
 			<input type="text" class="search" placeholder="Search..." />
 			<img class="search-icon" src="../statics/img/search.png" />
 		</div>
-		<div class="item">
-			<div class="item-img"></div>
-			<div class="item-desc item-name">Banana</div>
-			<div class="item-desc item-quantity">Quantity: 10</div>
+		<div class="items-ctn">
+			<div class="item">
+				<div
+					class="item-img"
+					style="
+						background: url('../statics/img/banana.jpg');
+						background-position: 40% 40%;
+						background-size: cover;
+					"
+				></div>
+				<div class="item-desc item-name">Banana</div>
+				<div class="item-desc item-quantity">Quantity: 10</div>
+			</div>
 		</div>
+		<script src="../statics/js/inventory.js"></script>
 	</body>
 </html>

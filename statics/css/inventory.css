@@ -57,20 +57,23 @@ body {
 	opacity: 1;
 }
 
-.item {
+.items-ctn {
 	width: 86vw;
-	height: 30vw;
-	border-radius: 2vw;
 	position: absolute;
 	top: 30vw;
 	left: 7vw;
 }
 
-.item-img {
+.item {
 	width: 86vw;
+	height: 30vw;
+	position: relative;
+	border-radius: 2vw;
+}
+
+.item-img {
+	width: inherit;
 	height: 20vw;
-	background: url("../img/banana.jfif");
-	background-position-y: 40%;
 	border-radius: 2vw;
 	position: absolute;
 	top: 0;
