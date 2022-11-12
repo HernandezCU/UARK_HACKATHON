@@ -24,7 +24,8 @@ function main() {
         ignorePantry: true
     }, (data) => {
         if(data.length == 0) {
-            //
+            recipeName.innerHTML = "No results found";
+            return;
         }
 
         //load name
