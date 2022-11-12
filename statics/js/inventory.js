@@ -106,7 +106,7 @@ function modifyItemCount(id, amt) {
     }
 
     //change db
-    jFetch(`${location.href}api/pantry/item/add`, {
+    jFetch(`${location.origin}/api/pantry/item/add`, {
         id: id,
         num: amt
     }, (data) => {
