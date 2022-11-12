@@ -1,0 +1,66 @@
+body {
+	font-family: forma-djr-display, sans-serif;
+	font-weight: bold;
+}
+
+a {
+	text-decoration: none;
+	color: #1f1f1f;
+}
+
+.icon {
+	width: 3vw;
+	margin-right: -0.2vw;
+}
+
+#name {
+	position: relative;
+	bottom: 0.4vw;
+	font-size: 3vw;
+}
+
+.nav {
+	font-size: 1.5vw;
+	position: absolute;
+	top: 5vw;
+	left: 10vw;
+}
+
+.nav-item {
+	position: relative;
+	bottom: 0.75vw;
+	margin-left: 1.5vw;
+	transition: color 200ms;
+}
+
+.nav-item:hover {
+	cursor: pointer;
+}
+
+.nav-item:not(:hover) {
+	color: #aaa;
+}
+
+.title {
+	font-size: 10vw;
+	position: absolute;
+	top: 12vw;
+	left: 10vw;
+	line-height: 10vw;
+}
+
+.try {
+	font-size: 3vw;
+	padding: 1vw 2vw;
+	border-radius: 1vw;
+	background: #f1f1f1;
+	position: absolute;
+	top: 35vw;
+	left: 10vw;
+	transition: background 200ms;
+}
+
+.try:hover {
+	cursor: pointer;
+	background: #e1e1e1;
+}

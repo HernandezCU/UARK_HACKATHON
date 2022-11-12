@@ -1,0 +1,57 @@
+body {
+	font-family: forma-djr-display, sans-serif;
+	font-weight: bold;
+}
+
+.icon {
+	width: 5vw;
+	margin-right: -0.2vw;
+}
+
+#name {
+	position: relative;
+	bottom: 0.4vw;
+	font-size: 6vw;
+}
+
+.nav {
+	position: absolute;
+	top: 6.5vw;
+	left: 7vw;
+}
+
+.inventory {
+    position: absolute;
+    top: 4.6vw;
+    right: 7vw;
+    font-size: 8vw;
+}
+
+.search-ctn {
+    position: absolute;
+    top: 18vw;
+    left: 7vw;
+}
+
+.search {
+    font-family: forma-djr-display, sans-serif;
+    height: 5vw;
+    width: 80vw;
+    background: #f1f1f1;
+    border: none;
+    border-radius: 2vw;
+    padding: 1vw 3vw;
+}
+
+.search-icon {
+    width: 4vw;
+    position: absolute;
+    top: 1.5vw;
+    right: 2vw;
+    opacity: 0.5;
+}
+
+.search-icon:hover {
+    cursor: pointer;
+    opacity: 1;
+}
