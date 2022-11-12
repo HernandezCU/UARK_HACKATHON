@@ -17,7 +17,6 @@ deta = Deta("b0j1zima_gUAdFysbwx7adfr7bQ7xRQkvajyp8vxu")
 users_db = deta.Base("users")
 pantries_db = deta.Base("pantries")
 
-# register static folder
 app.mount("/statics", StaticFiles(directory="statics"), name="statics")
 
 
@@ -105,27 +104,28 @@ def render_register(request: fastapi.Request):
 
     else:
         return templates.get_template("redirect.html", {"request": request, "url": "/"})
-    #return templates.get_template('index.html').render()
     
 
-@app.get("/users/logout", response_class=fastapi.responses.HTMLResponse)
+@app.api_route("/users/logout", response_class=fastapi.responses.HTMLResponse)
 async def logout(response: fastapi.Response, request: fastapi.Request):
 
-    
     response.delete_cookie("key", path="/")
     return templates.get_template("redirect.html").render({"url": "/"})
 
 
-@app.get("/users/pantry", response_class=fastapi.responses.HTMLResponse)
+@app.api_route("/users/pantry", response_class=fastapi.responses.HTMLResponse)
 async def pantry(request: fastapi.Request):
     pass
 
 
-@app.get("/api/key", response_class=fastapi.responses.JSONResponse)
+@app.api_route("/users/pantry/add", response_class=fastapi.responses.HTMLResponse)
+
+
+#FE USAGE ONLY
+@app.api_route("/api/key", response_class=fastapi.responses.JSONResponse)
 async def keys(request: fastapi.Request):
     
     ks = ["8d74294d6dfa492f845941e26d98c8e3", "d618860128c54d248fb9784f0e16cfce", "4bd03fd88e404d25993d236476d2cd7e"]
-    
         
     k = request.cookies.get("key")
 
