@@ -18,7 +18,8 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+For now, the way to access our project is to go to: [EXPIRED WEBAPP](expired.deta.dev)
+The scanning portion of this project will only run locally on our iPhones, but we will implement a feature so that it can be run on all devices.
 
 ## Usage
 
