@@ -8,18 +8,18 @@ body {
 }
 
 input {
-	font-size: 2vw;
+	font-size: 1.5vw;
 	height: 1vw;
 	width: 30vw;
 	background: none;
 	border: none;
 	border-bottom: solid 0.01vw;
-	padding: 0.5vw 0 1vw 1vw;
+	padding: 1vw 0 1vw 1vw;
 }
 
 #login,
 #register {
-	font-size: 2vw;
+	font-size: 1.5vw;
 	font-family: forma-djr-display, sans-serif;
 	font-weight: bold;
 	text-align: left;
@@ -36,6 +36,7 @@ input {
 }
 
 button {
+	font-size: 1.5vw;
 	border: solid 0.25vw;
 	border-radius: 1vw;
 	padding: 1vw 5vw;
