@@ -4,6 +4,10 @@ body {
 	overflow-x: hidden;
 }
 
+body::-webkit-scrollbar {
+	display: none;
+}
+
 img:hover {
 	cursor: pointer;
 }
@@ -156,10 +160,10 @@ img:hover {
 	padding: 4vw;
 }
 
-.recipe-ingredients {
+.recipe-requirements {
 	position: absolute;
-	top: 80vw;
-	left: 0;
+	top: 72vw;
+	left: 5vw;
 	height: 12vw;
 	width: 90vw;
 	font-size: 10vw;
