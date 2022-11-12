@@ -115,7 +115,7 @@ img:hover {
 }
 
 .item-desc:not(.item-name) {
-	opacity: 0.2;
+	opacity: 0.5;
 }
 
 .item-name {
@@ -128,6 +128,8 @@ img:hover {
 }
 
 .item-exp {
+	color: red !important;
+	opacity: 1 !important;
 	right: 0;
 }
 
