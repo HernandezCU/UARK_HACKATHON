@@ -65,7 +65,11 @@ Badges aren't necessary, per se, but they demonstrate street cred. Badges let ot
 
 ## Features
 
-If your project has a lot of features, list them here.
+- Expiration Date Tracker \ 
+- Recipe Generator \
+- Inventory Amount \
+- Inventory Search \ 
+- Inventory Addition 
 
 ## How to Contribute
 
