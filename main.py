@@ -170,16 +170,19 @@ async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity
             return {"error": "NONE","code": 200}
 
 
-@app.api_route("/api/upload", response_class=fastapi.responses.JSONResponse)
+@app.api_route("/api/upload", methods=["POST"], response_class=fastapi.responses.JSONResponse)
 async def upload_img(request: fastapi.Request, file: UploadFile = File(...)):
     k = request.cookies.get("key")
-    name = file.filename
-    f = file.file
-    res = food_photos.put(name, f)
-    return res
+    if k is None:
+        return {"error": "NOT_ALLOWED","code": 455}
+    else:
+        name = str(k) + ".png"
+        f = file.file
+        res = food_photos.put(name, f)
+        return res
 
 
-@app.api_route("api/cdn", response_class=fastapi.responses.JSONResponse)
+@app.api_route("/api/cdn", response_class=fastapi.responses.JSONResponse)
 async def get_cdn(request: fastapi.Request):
     k = request.cookies.get("key")
     if k is None:
@@ -201,6 +204,6 @@ async def keys(request: fastapi.Request):
         return {"error": "NONE","code": 200 ,"key": random.choice(ks)}
     
     
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="localhost", port=8000, reload=True)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("main:app", host="localhost", port=8000, reload=True)
