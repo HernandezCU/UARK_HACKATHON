@@ -21,37 +21,55 @@ body {
 }
 
 .inventory {
-    position: absolute;
-    top: 4.6vw;
-    right: 7vw;
-    font-size: 8vw;
+	position: absolute;
+	top: 4.6vw;
+	right: 7vw;
+	font-size: 8vw;
 }
 
 .search-ctn {
-    position: absolute;
-    top: 18vw;
-    left: 7vw;
+	position: absolute;
+	top: 18vw;
+	left: 7vw;
 }
 
 .search {
-    font-family: forma-djr-display, sans-serif;
-    height: 5vw;
-    width: 80vw;
-    background: #f1f1f1;
-    border: none;
-    border-radius: 2vw;
-    padding: 1vw 3vw;
+	font-family: forma-djr-display, sans-serif;
+	font-size: 2.5vw;
+	height: 5vw;
+	width: 80vw;
+	background: #f1f1f1;
+	border: none;
+	border-radius: 2vw;
+	padding: 1vw 3vw;
 }
 
 .search-icon {
-    width: 4vw;
-    position: absolute;
-    top: 1.5vw;
-    right: 2vw;
-    opacity: 0.5;
+	width: 4vw;
+	position: absolute;
+	top: 1.5vw;
+	right: 2vw;
+	opacity: 0.5;
 }
 
 .search-icon:hover {
-    cursor: pointer;
-    opacity: 1;
+	cursor: pointer;
+	opacity: 1;
+}
+
+.item {
+	width: 86vw;
+	height: 30vw;
+	border-radius: 2vw;
+	position: absolute;
+	top: 30vw;
+	left: 7vw;
+}
+
+.item-img {
+	width: 86vw;
+	border-radius: 2vw;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
