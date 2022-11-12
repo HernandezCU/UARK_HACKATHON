@@ -12,43 +12,37 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="../statics/js/inventory-item.js"></script>
-		<title>Inventory</title>
+		<title>Recipe</title>
 	</head>
 	<body>
 		<div class="nav">
 			<img class="icon" src="../statics/img/icon.png" />
 			<span id="name">ex<span style="color: red">pi</span>red.</span>
 		</div>
-		<span class="inventory">inventory</span>
+		<span class="inventory">recipe</span>
 		<img
 			class="sign-out"
 			src="../statics/img/sign-out.png"
 			onclick="location.href = '/users/logout';"
 		/>
-		<div class="search-ctn">
-			<input type="text" class="search" placeholder="Search..." />
-			<img class="search-icon" src="../statics/img/search.png" />
-			<img
-				class="upload-icon"
-				src="../statics/img/upload.png"
-				onclick="location.href = '/users/upload';"
-			/>
-		</div>
-		<div class="items-ctn">
-			{%for item in items%}
-				<div class="item">
-					<div
-						class="item-img"
-						style="
-							background: url('{{item['image']}}');
-							background-position: 40% 40%;
-							background-size: cover;
-						"
-					></div>
-					<div class="item-desc item-name">{{item['name']}}</div>
-					<div class="item-desc item-amount">Amount: {{item['quantity']}}</div>
-				</div>
-			{%endfor%}
+		<div class="nav-vis"></div>
+		<div class="recipe">
+			<div class="recipe-food"></div>
+			<div class="recipe-name">
+				<span style="color: lightgreen">recipe</span>bananas
+			</div>
+			<div class="recipe-requirements">
+				<ol>
+					<span style="color: red">ingredients:</span>
+					<li>bananas</li>
+					<li>time</li>
+				</ol>
+				<ol>
+					<span style="color: blue">steps:</span>
+					<li>bananas</li>
+					<li>time</li>
+				</ol>
+			</div>
 		</div>
 		<script src="../statics/js/inventory.js"></script>
 	</body>
