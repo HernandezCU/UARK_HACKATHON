@@ -34,11 +34,12 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 ## Credits
 
 Collaborators: 
-Roberto Aguero: 
-Matthew Anderson: https://github.com/notmatthewa
-Carlos Hernandez:
-Carlos Borjes: 
-Justin Phu:
+
+Roberto Aguero: \
+Matthew Anderson: https://github.com/notmatthewa   \
+Carlos Hernandez: \
+Carlos Borjes: \
+Justin Phu: \
 Rithyka (Kenshin): 
     
 List your collaborators, if any, with links to their GitHub profiles.
