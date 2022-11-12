@@ -9,7 +9,7 @@
 
 
 ![Alt text](/statics/img/4.png?raw=true "Optional Title")
-<img src="4.png" alt="drawing" width="100"/>
+<img src="/statics/img/4.png"  width="100"/>
 
 ## Table of Contents
 
