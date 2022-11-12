@@ -3,9 +3,11 @@
 ## EXPIRED: Description
 
 - The purpose of this project? UARK 2022 FALL HACKATHON! Additionally, we all enjoy coding and so building EXPIRED was an enjoyment as a team.
-- What is EXPIRED? This is a pantry tracker smart home device which runs on a mobile device. It captures information through a camera and uses a UCP API to gather data. This data is then sent to a web app that is ran on a cellular device to be able to track information, expiry dates, and recipes. This allows the user to check their pantry away from home and innovates the theme with a sustainability aspect.
+- What is EXPIRED? This is a pantry tracker smart home device which runs on a mobile device. It captures information through a camera and uses a UPC API to gather data. This data is then sent to a web app that is ran on a cellular device to be able to track information, expiry dates, and recipes. This allows the user to check their pantry away from home and innovates the theme with a sustainability aspect.
 - The biggest problem for food wasting comes from households. 43% of waste is from homes and with expired we are able to solve this issue.
 - Through this project, we learned that Raspberry Pi is more difficult to implement than we thought, but we powered through and innovated alternatives.
+
+<img src="/statics/img/4.png"  width="100"/>
 
 ## Table of Contents
 
@@ -31,11 +33,21 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
+Collaborators: https://null.cards
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+Roberto Aguero: https://github.com/tif1975  \
+Matthew Anderson: https://github.com/notmatthewa   \
+Carlos Hernandez: https://github.com/hernandezcu \
+Carlos Borjes: \
+Justin Phu: \
+Rithyka (Kenshin): https://github.com/kenshin7 
 
-If you followed tutorials, include links to those here as well.
+APIs: \
+Spoonacular: https://spoonacular.com/food-api/docs \
+Recipes API: https://rapidapi.com/blog/recipe-apis/ 
+
+Hosting: \
+EasyCDN: https://github.com/SlumberDemon/EasyCdn 
 
 ## License
 
@@ -62,3 +74,7 @@ If you created an application or package and would like other developers to cont
 ## Tests
 
 Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+    
+## Presentation Link
+
+Google Slides: https://docs.google.com/presentation/d/1zTqADIh92D1o7bzg2DA3xrhZ9h6-YK-9aN6_4LUtEKg/edit?usp=sharing
