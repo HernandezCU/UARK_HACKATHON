@@ -1,6 +1,7 @@
 body {
 	font-family: forma-djr-display, sans-serif;
 	font-weight: bold;
+	overflow-x: hidden;
 }
 
 img:hover {
@@ -119,4 +120,49 @@ img:hover {
 
 .item-amount {
 	right: 0;
+}
+
+/* CSS for recipe.html */
+
+.nav-vis {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 20vw;
+	width: 100vw;
+	z-index: -1;
+}
+
+.recipe-food {
+	position: absolute;
+	top: 20vw;
+	left: 0;
+	height: 40vw;
+	width: 100vw;
+	background: url("../img/banana.jpg");
+	background-size: cover;
+	background-position: 40% 40%;
+}
+
+.recipe-name {
+	position: absolute;
+	top: 60vw;
+	left: 0;
+	height: 12vw;
+	width: 100vw;
+	background: #1f1f1f;
+	color: #f1f1f1;
+	font-size: 10vw;
+	padding: 4vw;
+}
+
+.recipe-ingredients {
+	position: absolute;
+	top: 80vw;
+	left: 0;
+	height: 12vw;
+	width: 90vw;
+	font-size: 10vw;
+	padding: 4vw;
+	overflow-wrap: break-word;
 }
