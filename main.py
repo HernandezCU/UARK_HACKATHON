@@ -38,7 +38,7 @@ def root(request: fastapi.Request):
         return templates.get_template('inventory.html').render()
 
 
-@app.api_route("/user/login", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
+@app.api_route("/users/login", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
 def login(response: fastapi.Response, request: fastapi.Request, email: str = Form(...), password: str = Form(...)):
     
     j = users_db.fetch({"email": str(email.lower())})
@@ -48,16 +48,16 @@ def login(response: fastapi.Response, request: fastapi.Request, email: str = For
         user = j.items[0]
         
         if x == True:
-            response = fastapi.responses.RedirectResponse(url="/", status_code=200)
+            response = templates.get_template("redirect.html").render()
             response.set_cookie(key="key", value=user['key'])
             return response
 
         else:
-            response = fastapi.responses.RedirectResponse(url="/login", status_code=200)
+            response = templates.TemplateResponse("redirect.html", {"request": request, "url": "/login"})
             return response
 
     else:
-        response = fastapi.responses.RedirectResponse(url="/login", status_code=200)
+        response = templates.TemplateResponse("redirect.html", {"request": request, "url": "/login"})
         return response
 
 
@@ -69,12 +69,31 @@ def render_login(request: fastapi.Request):
         return templates.get_template('login.html').render()
 
     else:
-        return fastapi.responses.RedirectResponse(url="/", status_code=200)
+        return templates.get_template('redirect.html').render({"url": "/"})
     
 
-@app.api_route("/user/register", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
-def register():
-    return "REGISTER"
+@app.api_route("/users/register", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
+def register(response: fastapi.Response, name: str = Form(...), email: str = Form(...), password: str = Form(...)):
+    j = users_db.fetch({"email": email.lower()})
+
+    if j.count != 0:
+        return templates.get_template('redirect.html').render({"url": "/register"})
+
+    else:
+        try:
+            p = password.encode()
+            hashed_p = bcrypt.hashpw(p,"$2b$12$vj2GaHW10eRxDcJTTTAWI.".encode())
+            key = secrets.token_urlsafe(12)
+
+            u = {"key": key, "name": name, "email": email.lower(), "password": hashed_p.decode()}
+            users_db.put(u)
+
+            response.set_cookie(key="key", value=u['key'])
+            response = templates.get_template("redirect.html").render({"url": "/"})
+            return response
+
+        except Exception as e:
+            return templates.get_template('redirect.html').render({"url": "/register"})
 
 
 @app.api_route("/register", methods=["GET"], response_class=fastapi.responses.HTMLResponse)
@@ -86,9 +105,16 @@ def render_register(request: fastapi.Request):
         return templates.get_template('register.html').render()
 
     else:
-        return fastapi.responses.RedirectResponse(url="/", status_code=200)
+        return templates.get_template("redirect.html", {"request": request, "url": "/"})
     #return templates.get_template('index.html').render()
     
+
+@app.get("/users/logout", response_class=fastapi.responses.HTMLResponse)
+async def logout(response: fastapi.Response, request: fastapi.Request):
+
+    response = templates.get_template("redirect.html").render({"url": "/"})
+    response.delete_cookie("key", path="/")
+    return response
 
 
 if __name__ == "__main__":
