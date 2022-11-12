@@ -1,11 +1,11 @@
-if (window.matchMedia("(max-width: 767px)").matches) {
+if ($(window).width() / $(window).height() < 1.7) {
 	$("#scroll-ctn").css("opacity", "0");
 } else {
 	$("#scroll-ctn").css("opacity", "1");
 }
 
 $(window).resize(function () {
-	if (window.matchMedia("(max-width: 767px)").matches) {
+	if ($(window).width() / $(window).height() < 1.7) {
 		$("#scroll-ctn").css("opacity", "0");
 	} else {
 		$("#scroll-ctn").css("opacity", "1");

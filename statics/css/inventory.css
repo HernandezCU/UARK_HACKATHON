@@ -91,6 +91,10 @@ img:hover {
 	left: 0;
 }
 
+.item-img:hover {
+	cursor: pointer;
+}
+
 .item-desc {
 	font-size: 3.5vw;
 	position: absolute;
@@ -98,13 +102,13 @@ img:hover {
 }
 
 .item-desc:not(.item-name) {
-	opacity: 0.25;
+	opacity: 0.2;
 }
 
 .item-name {
 	left: 0;
 }
 
-.item-quantity {
+.item-amount {
 	right: 0;
 }
