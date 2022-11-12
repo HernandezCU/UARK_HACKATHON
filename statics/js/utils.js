@@ -48,6 +48,12 @@ function pFetch(url, callback) {
     });
 }
 
+function getApiKey() {
+    jFetch(`${location.origin}/api/key`, {}, (data) => {
+        setGlobalConstant("API_KEY", data.key);
+    });
+}
+
 function setGlobalConstant(name, value) {
     Object.defineProperty(window, name, {
         value: value,

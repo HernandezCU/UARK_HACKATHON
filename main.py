@@ -181,6 +181,18 @@ async def logout(response: fastapi.Response, request: fastapi.Request):
     return templates.get_template("redirect.html").render({"url": "/"})
 
 
+@app.api_route("/recipe", methods=["GET"], response_class=fastapi.responses.HTMLResponse)
+async def recipe(request: fastapi.Request):
+    k = request.cookies.get("key")
+
+    if k is None:
+        return templates.get_template('redirect.html').render({"url": "/login"})
+
+    else:
+        return templates.get_template('recipe.html').render()
+
+
+
 #FE USE ONLY
 @app.api_route("/api/pantry/get", response_class=fastapi.responses.JSONResponse)
 async def pantry(request: fastapi.Request):
@@ -211,7 +223,7 @@ async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity
 
 @app.api_route("/api/pantry/item/{action}", response_class=fastapi.responses.JSONResponse)
 async def update_count(request: fastapi.Request, action: str, id: str, num: int):
-    
+
     p = pantries_db.fetch({"key": request.cookies.get("key")}).items[0]
     for i in p['items']:
         if str(p['items'][i]['item_id']) == str(id):
@@ -224,9 +236,9 @@ async def update_count(request: fastapi.Request, action: str, id: str, num: int)
                 p['items'][i]['quantity'] -= num
                 pantries_db.put({"key": request.cookies.get("key"), "items": p['items']})
                 return {"error": "NONE","code": 200}
-    
+
     return {"error": "ITEM_NOT_FOUND","code": 200}
-            
+
 
 @app.api_route("/api/upload", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
 async def upload_img(request: fastapi.Request, file: UploadFile = File(...)):
@@ -285,6 +297,7 @@ async def process_barcode(barcode: str, key: str):
                     return {"success": True}
 
         return {"success": False}
+
 
 
 
