@@ -141,7 +141,7 @@ async def pantry(request: fastapi.Request):
     
 
 @app.api_route("/api/pantry/add", response_class=fastapi.responses.JSONResponse)
-async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity: int, image: str, upc: str, item_type: str):
+async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity: int, image: str, upc: str):
     #add current date, and expiration date
     #item_ID, name, quantity, image, upc, name, quantity, image, upc
     k = request.cookies.get("key")
@@ -155,7 +155,6 @@ async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity
             exp_d = date + datetime.timedelta(days=r)
             itm = {
                    "item_id": item_id, 
-                   "type": item_type,
                    "name": name, 
                    "quantity": quantity, 
                    "image": image,
@@ -182,13 +181,13 @@ async def upload_img(request: fastapi.Request, file: UploadFile = File(...)):
         return res
 
 
-@app.api_route("/api/cdn", response_class=fastapi.responses.JSONResponse)
-async def get_cdn(request: fastapi.Request):
+@app.api_route("/api/cdn/{key}", response_class=fastapi.responses.JSONResponse)
+async def get_cdn(request: fastapi.Request, key: str):
     k = request.cookies.get("key")
     if k is None:
         return {"error": "NOT_ALLOWED","code": 455}
     else:
-        res = food_photos.get(str(k) + ".png")
+        res = food_photos.get(str(key) + ".png")
         return fastapi.responses.StreamingResponse(res.iter_chunks(1024), media_type="image/png")
 
 
