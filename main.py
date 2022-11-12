@@ -35,8 +35,8 @@ def create_item(id, nm, qt, pic, upc):
             "quantity": qt, 
             "image": pic,
             "upc": upc, 
-            "date_added": str(date.day) + "/" + str(date.month) + "/" + str(date.year),
-            "expiration_date": str(exp_d.day) + "/" + str(exp_d.month) + "/" + str(exp_d.year)
+            "date_added": str(date.year) + "/" + str(date.month) + "/" + str(date.day),
+            "expiration_date": str(exp_d.year) + "/" + str(exp_d.month) + "/" + str(exp_d.day)
             }}
     
 
@@ -182,7 +182,7 @@ async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity
             return {"error": "NONE","code": 200}
 
 
-@app.api_route("/api/upload", methods=["POST"], response_class=fastapi.responses.JSONResponse)
+@app.api_route("/api/upload", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
 async def upload_img(request: fastapi.Request, file: UploadFile = File(...)):
     k = request.cookies.get("key")
     if k is None:
@@ -191,7 +191,8 @@ async def upload_img(request: fastapi.Request, file: UploadFile = File(...)):
         name = str(k) + ".png"
         f = file.file
         res = food_photos.put(name, f)
-        return res
+        print(res)
+        return templates.get_template("redirect.html").render({"url": "/"})
 
 
 @app.api_route("/api/cdn/{key}", response_class=fastapi.responses.JSONResponse)
