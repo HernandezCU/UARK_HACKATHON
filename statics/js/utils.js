@@ -1,6 +1,3 @@
-const   BY_UPC = `https://api.spoonacular.com/food/products/upc`,
-        IMG_ANAL = `https://api.spoonacular.com/food/images/analyze`;
-
 function stringDecode(input, delimiter) {
     let pairs = input.split(delimiter);
     let output = {};
@@ -15,7 +12,8 @@ function stringEncode(input, delimiter) {
     for(let [key, value] of Object.entries(input)) {
         output += `${key}=${value}${delimiter}`;
     }
-    return output.length > 0 ? output.substring(0, output.length - 1) : output;
+    output = output.length > 0 ? output.substring(0, output.length - 1) : output
+    return encodeURI(output);
 }
 
 function bFetch(url, params, callback) {
@@ -37,5 +35,23 @@ function jFetch(url, params, callback) {
     })
     .catch((err) => {
         console.error(err);
+    });
+}
+function pFetch(url, callback) {
+    fetch(url)
+    .then((res) => (res.json()))
+    .then((data) => {
+        callback(data);
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+}
+
+function setGlobalConstant(name, value) {
+    Object.defineProperty(window, name, {
+        value: value,
+        configurable: false,
+        writable: false
     });
 }
