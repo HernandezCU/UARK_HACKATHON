@@ -40,14 +40,14 @@ Matthew Anderson: https://github.com/notmatthewa   \
 Carlos Hernandez: https://github.com/hernandezcu \
 Carlos Borjes: \
 Justin Phu: \
-Rithyka (Kenshin): https://github.com/kenshin7 \
+Rithyka (Kenshin): https://github.com/kenshin7 
 
 APIs: \
 Spoonacular: https://spoonacular.com/food-api/docs \
-Recipes API: https://rapidapi.com/blog/recipe-apis/ \
+Recipes API: https://rapidapi.com/blog/recipe-apis/ 
 
 Hosting: \
-EasyCDN: https://github.com/SlumberDemon/EasyCdn \
+EasyCDN: https://github.com/SlumberDemon/EasyCdn 
 
 ## License
 
