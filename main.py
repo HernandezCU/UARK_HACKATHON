@@ -18,6 +18,7 @@ deta = Deta("b0j1zima_gUAdFysbwx7adfr7bQ7xRQkvajyp8vxu")
 users_db = deta.Base("users")
 pantries_db = deta.Base("pantries")
 food_photos = deta.Drive("food_photos")
+recipes_db = deta.Base("recipes")
 
 
 
@@ -100,6 +101,32 @@ def render_login(request: fastapi.Request):
     else:
         return templates.get_template('redirect.html').render({"url": "/"})
     
+
+@app.api_route("/users/recipes", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
+async def recipes(request: fastapi.Request, response: fastapi.Response, item: str = Form(...)):
+    k = request.cookies.get("key")
+    if k is None:
+        return templates.get_template('redirect.html').render({"url": "/login"})
+    else:
+        try:
+            j = users_db.fetch({"key": k})
+
+        except Exception as e:
+            print(e)
+            raise HTTPException(status_code=422, detail="Something went wrong")
+        try:
+            x = pantries_db.fetch({"key": k}).items[0]
+            z = x['items']
+            l = []
+            for i in z:
+                l.append(z[i])
+            
+
+            return templates.get_template('recipes.html').render({"items": l})
+        except Exception as e:
+            print(e)
+            return templates.get_template('recipes.html').render({"items": []})
+        
 
 @app.api_route("/users/register", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
 def register(response: fastapi.Response, name: str = Form(...), email: str = Form(...), password: str = Form(...)):
