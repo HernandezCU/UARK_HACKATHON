@@ -10,4 +10,4 @@ function updateImg() {
     reader.readAsDataURL(file);
 }
 
-input.addEventListener("onchange", updateImg);
+input.addEventListener("change", updateImg);
