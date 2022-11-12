@@ -209,22 +209,6 @@ async def add_pantry(request: fastapi.Request, item_id: str, name: str, quantity
             return {"error": "NONE","code": 200}
 
 
-@app.api_route("/api/pantry/item/{action}", response_class=fastapi.responses.JSONResponse)
-async def update_count(request: fastapi.Request, action, id: str, num: int):
-    try:
-        for i in pantries_db.fetch().items:
-            if id in i['items']:
-                if action == "add":
-                    i['items'][id]['quantity'] += num
-                elif action == "remove":
-                    i['items'][id]['quantity'] -= num
-                pantries_db.put(i)
-                return {"error": "NONE","code": 200}
-    except Exception as e:
-        print(e)
-        return {"error": "NOT_ALLOWED","code": 455}
-            
-
 @app.api_route("/api/upload", methods=["POST"], response_class=fastapi.responses.HTMLResponse)
 async def upload_img(request: fastapi.Request, file: UploadFile = File(...)):
     k = request.cookies.get("key")
@@ -268,6 +252,7 @@ async def process_barcode(barcode: str, key: str):
         res = session.get(f'https://api.spoonacular.com/food/products/upc/{barcode}?apiKey={random_key}')
         res = res.json()
 
+        print(res)
 
         if 'status' in res and res['status'] == "failure":
             return {"success": "NOT_FOUND"}
