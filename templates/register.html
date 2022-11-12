@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+</head>
+
+<body>
+    <header>Register</header>
+
+    <div id="register">
+        <form class="user" action="/users/register" enctype="multipart/form-data" method="post">
+            <input class="" type="text" id="name" placeholder="Name" name="name"
+                required>
+            <input class="" type="email" id="email" placeholder="Email"
+                name="email" required>
+            <input class="" type="password" id="password" placeholder="Password"
+                name="password" required>
+            <button class="" type="submit">Register</button>
+            <p>Already have an account? <button id="logIn" onclick="location.href='/login';">Login</button></p>
+        </form>
+    </div>
+    <script src=""></script>
+</body>
+
+</html>
