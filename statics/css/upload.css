@@ -1,74 +1,40 @@
 body {
 	font-family: forma-djr-display, sans-serif;
 	font-weight: bold;
-	background: #f1f1f1;
 }
 
-#upload-ctn {
-	width: 57.5vw;
-	height: 37.5vw;
-	background: #fff;
+input[type="file"],
+input[type="submit"] {
+	display: none;
+}
+
+.container {
 	position: absolute;
-	left: 50%;
 	top: 50%;
+	left: 50%;
 	transform: translate(-50%, -50%);
-	border-radius: 5vw;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
+	padding: 5vw;
+	border-radius: 2vw;
+	background: #f1f1f1;
 	box-shadow: rgba(0, 0, 0, 0.2) 0 2vw 8vw 0;
 }
 
-#dashed {
-	width: 50vw;
-	height: 30vw;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	border: #1f1f1f 0.25vw;
-	border-style: dashed;
-	border-radius: 3vw;
-	opacity: 0.25;
-	z-index: -1;
-}
-
-input[type="submit"] {
-	background: none;
-	border: none;
-	display: none;
-}
-
-input[type="file"] {
-	display: none;
-}
-
-.file-upload {
+.file-upload,
+.submit {
+	cursor: pointer;
 	font-size: 5vw;
-	height: 16vw;
-	width: 40vw;
+	text-align: center;
+	margin: 1vw;
+	width: 30vw;
 	border: 0.1vw solid #ccc;
-	display: inline-block;
-	padding: 0 2vw 1vw 2vw;
 	border-radius: 1vw;
-	cursor: pointer;
-	transition: background 250ms;
+	display: inline-block;
+	padding: 2vw 2vw;
+	transition: color 250ms;
 }
 
-.submit-file-upload {
-	font-size: 3vw;
-	width: 40vw;
-	border: 0.1vw solid #ccc;
-	display: inline-block;
-	padding: 1vw 2vw 1vw 2vw;
-	border-radius: 1vw;
-	cursor: pointer;
-	transition: background 250ms;
-}
-
-.submit-file-upload:hover,
-.file-upload:hover {
+.file-upload:hover,
+.submit:hover {
 	background: #1f1f1f;
 	color: #f1f1f1;
 }
