@@ -9,8 +9,10 @@ a {
 }
 
 .icon {
-	width: 3vw;
-	margin-right: -0.2vw;
+	width: 2vw;
+	margin-right: 0;
+	position: relative;
+	bottom: 0.2vw;
 }
 
 #name {
