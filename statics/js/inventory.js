@@ -21,7 +21,7 @@ function prep() {
             clearInterval(inte);
             main();
         }
-    }, 100);
+    }, 30);
 }
 function main() {
     //use quagga with image above to get upc
@@ -53,7 +53,6 @@ function getCode(callback) {
         src: uploadedImageUrl
     }, (result) => {
         if(typeof(result) != "undefined") {
-            console.log(result.codeResult.code);
             callback(result.codeResult.code);
             return true;
         }
