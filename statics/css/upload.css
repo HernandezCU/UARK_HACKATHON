@@ -10,7 +10,6 @@ input[type="submit"] {
 
 .container {
 	position: absolute;
-<<<<<<< HEAD
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -23,15 +22,6 @@ input[type="submit"] {
     align-content: center;
     justify-content: center;
     align-items: center;
-=======
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	padding: 3vw;
-	border-radius: 2vw;
-	background: #f1f1f1;
-	box-shadow: rgba(0, 0, 0, 0.2) 0 2vw 8vw 0;
->>>>>>> 82a72dd6f2b2d7b9fc1a98405a33ad4259106267
 }
 
 .file-upload,
