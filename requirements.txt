@@ -1,0 +1,4 @@
+bcrypt
+deta
+fastapi
+jinja2

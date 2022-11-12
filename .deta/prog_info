@@ -1,0 +1,1 @@
+{"id":"021961df-2786-48bf-aaa0-921fb02eb9c0","space":4037,"runtime":"python3.9","name":"expired","path":"br1az3","project":"b0j1zima","account":"144798365827","region":"us-east-1","deps":["bcrypt","deta","fastapi","jinja2"],"envs":null,"public":true,"log_level":"off","cron":""}
