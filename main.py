@@ -30,7 +30,6 @@ def create_item(id, nm, qt, pic, upc):
     r = random.randint(91,547)
     date = datetime.datetime.now()
     exp_d = date + datetime.timedelta(days=r)
-    c
     return {id: {
             "item_id": id, 
             "name": nm, 
@@ -246,15 +245,25 @@ async def process_barcode(barcode: str, key: str):
     if key == "NOT_ALLOWED":
         return {"success": False}
     else:
-        session.get("https://api.spoonacular.com/recipes/716429/information?apiKey=8d74294d6dfa492f845941e26d98c8e3&includeNutrition=true")
-        res = session.get("https://api.spoonacular.com/food/products/upc/{barcode}")
-    
-        items = pantries_db.fetch().items
-        for i in items:
-            if i["key"] == key:
-                # i["items"].update(create_item(res["id"], res["title"], 1, res["image"], barcode))
-                # pantries_db.put(i)
-                return {"success": True}
+        ks = ["8d74294d6dfa492f845941e26d98c8e3", "d618860128c54d248fb9784f0e16cfce", "4bd03fd88e404d25993d236476d2cd7e"]
+
+        random_key = random.choice(ks)
+        
+        res = session.get(f'https://api.spoonacular.com/food/products/upc/{barcode}?apiKey={random_key}')
+        res = res.json()
+
+        print(res)
+
+        if 'status' in res and res['status'] == "failure":
+            return {"success": "NOT_FOUND"}
+        else:
+            items = pantries_db.fetch().items
+            for i in items:
+                if i["key"] == key:
+                    print(res)
+                    i["items"].update(create_item(res["id"], res["title"], 1, res["image"], barcode))
+                    pantries_db.put(i)
+                    return {"success": True}
                 
         return {"success": False}
 
