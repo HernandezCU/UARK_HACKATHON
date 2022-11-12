@@ -1,10 +1,11 @@
-//~ get api key from /api/key after sign in
-
 window.addEventListener("load", () => {
     //dom variables (~jank?)
     window.video = document.getElementById("video");
     window.upcText = document.getElementById("upc-text");
     window.upcDetails = document.getElementById("upc-details");
+
+    //get an api key from server
+    setApiKey();
 
     //request camera permission
     reqCamera();
@@ -12,6 +13,19 @@ window.addEventListener("load", () => {
     //initialize quagga and start processing
     startQuagga();
 });
+
+function setApiKey() {
+    fetch(`https://expired.deta.dev/api/key`)
+    .then((res) => {
+        return res.json();
+    })
+    .then((data) => {
+        window.apiKey = data;
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+}
 
 function reqCamera() {
     //actually request camera permission
@@ -23,8 +37,8 @@ function reqCamera() {
     }).then((mediaStream) => {
         //set video element source to camera stream
         video.srcObject = mediaStream;
-        video = document.getElementsByTagName("video")[0];
-        video.play();
+        //video = document.getElementsByTagName("video")[0];
+        //video.play();
     }).catch((err) => {
         console.error(err);
     });
@@ -62,7 +76,7 @@ function startQuagga() {
         upcText.innerHTML = data.codeResult.code;
 
         //request data via upc and respond to it
-        reqByUPC(data.codeResult.code, respond);
+        reqByUPC(apiKey, data.codeResult.code, respond);
 
         //stop scanning
         Quagga.stop();
@@ -75,7 +89,7 @@ function respond(data) {
     //check if product exists in spoonacular db
     if(data.status != undefined) {
         //~ do thing when product not found
-        
+
         updateDom(false);
         return false;
     }
